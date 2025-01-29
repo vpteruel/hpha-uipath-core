@@ -16,7 +16,7 @@ namespace HPHA.UiPath.Core.UnitTests.ImageProcessing
         public ImageRegionSnipperTest()
         {
             _inputFileName = Guid.NewGuid().ToString();
-            _inputFolderPath = "TestImages";
+            _inputFolderPath = Guid.NewGuid().ToString();
             
             Directory.CreateDirectory(_inputFolderPath);
 
@@ -55,7 +55,7 @@ namespace HPHA.UiPath.Core.UnitTests.ImageProcessing
         {
             if (Directory.Exists(_inputFolderPath))
             {
-                //Directory.Delete(_inputFolderPath, true);
+                Directory.Delete(_inputFolderPath, true);
             }
         }
     }

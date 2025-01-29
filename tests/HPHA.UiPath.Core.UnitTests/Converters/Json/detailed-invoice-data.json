@@ -6,7 +6,7 @@
     "apiVersion": "2024-11-30",
     "modelId": "prebuilt-invoice",
     "stringIndexType": "textElements",
-    "content": "Culligan\nREMIT PAYMENT TO:\nCULLIGAN WATER\nINVOICE #:\nDEC24-HPHA\nTM\n265 Industrial Rd.\nTERMS:\nNET/30\nCambridge, ON N3H 4R9\nDATE:\nJAN-15-2025\nHST #870494739 RT 0001\nBILL TO:\nHURON PERTH HEALTHCARE ALLIANCE\nSubTOTAL:\n293.45\n46 General Hospital Drive\nHST:\n2.32\nStratford, ON N5A 2Y6\nBALANCE:\n$295.77\nhpha.mminvoice@hpha.ca\nPO #:\n255167\nAccount #\nPO #\nName\nAddress\nLocation\nCity\nService Date\nInvoice#\nQTY\nDescription\nPrice\nAmount\nHST\nTOTAL\n0027611\nPO255167\nListowel Mental Health\n285 Sarah Ave N\n2nd Floor\nListowel ON N4W 2Y8\n01/01/2025 - 01 4518969\n1 Rental - Bottled Water Coolers\n9.95\n9.95\n1.49\n11.44\n0027611\nPO255167\nListowel Mental Health\n285 Sarah Ave N\n2nd Floor\nListowel ON N4W 2Y8\n12/02/2024\n41926TN\n1 Fuel Surcharge\n5.50\n5.50\n0.83\n6.33\n0027611\nPO255167\nListowel Mental Health\n285 Sarah Ave N\n2nd Floor\nListowel ON N4W 2Y8\n12/02/2024\n41926TN\n3 18L RO Water Delv\n7.75\n23.25\n0.00\n23.25\n0027611\nPO255167\nListowel Mental Health\n285 Sarah Ave N\n2nd Floor\nListowel ON N4W 2Y8\n12/02/2024\n41926TN\n3 Bottle Deposit\n10.00\n30.00\n0.00\n30.00\n2nd Floor Total\n68.70\n2.32\n71.02\n0042044\nPO255167\nStratford General Hospital\n46 General Hospital Dr.\nLab Break Room - W5.202\nStratford ON N5A 2Y6\n12/09/2024\n46973TN\n9 18L RO Water Delv\n7.75\n69.75\n0.00\n69.75\n0042044\nPO255167\nStratford General Hospital\n46 General Hospital Dr.\nLab Break Room - W5.202\nStratford ON N5A 2Y6\n12/23/2024\n56504TN\n6 18L RO Water Delv\n7.75\n46.50\n0.00\n46.50\nLab Break Room - W5.202 Total\n116.25\n0.00\n116.25\n0059301\nPO255167\nStratford General Hospital\n46 General Hospital Dr.\nMDRD Communication Room, E Stratford ON N5A 2Y6\n12/09/2024\n46979TN\n2 18L RO Water Delv\n7.75\n15.50\n0.00\n15.50\n0059301\nPO255167\nStratford General Hospital\n46 General Hospital Dr.\nMDRD Communication Room, E Stratford ON N5A 2Y6\n12/23/2024\n56507TN\n4 18L RO Water Delv\n7.75\n31.00\n0.00\n31.00\nMDRD Communication Room, Basement #EB740 Total\n46.50\n0.00\n46.50\n0078764\nPO255167\nStratford General Hospital\n46 General Hospital Drive\nMedical Staff Lounge - 1st Floor Stratford ON N5A 2Y6\n12/09/2024\n46985TN\n3 18L RO Water Delv\n7.75\n23.25\n0.00\n23.25\nMedical Staff Lounge - 1st Floor Rmm W1-236 Total\n23.25\n0.00\n23.25\n0007646\nPO255167\nHPHA Stratford General Hospital\n46 General Hospital Drive\nPharmacy\nStratford ON N5A 2Y6\n12/09/2024\n47054TN\n3 18L RO Water Delv\n7.75\n23.25\n0.00\n23.25\n0007646\nPO255167\nHPHA Stratford General Hospital\n46 General Hospital Drive\nPharmacy\nStratford ON N5A 2Y6\n12/23/2024\n56564TN\n2 18L RO Water Delv\n7.75\n15.50\n0.00\n15.50\nPharmacy Total\n38.75\n0.00\n38.75\nGrand Total\n293.45\n2.32\n295.77\nPage 1 of 1",
+    "content": "Content of the invoice",
     "pages": [
       {
         "pageNumber": 1,
@@ -826,7 +826,7 @@
             }
           },
           {
-            "content": "hpha.mminvoice@hpha.ca",
+            "content": "test@domain.ca",
             "polygon": [
               1.5651,
               1.9157,
@@ -7925,7 +7925,7 @@
             ]
           },
           {
-            "content": "hpha.mminvoice@hpha.ca",
+            "content": "test@domain.ca",
             "polygon": [
               1.5651,
               1.9154,
