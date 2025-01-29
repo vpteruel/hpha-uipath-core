@@ -5,21 +5,21 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
     public class ValueAddress
     {
         [JsonPropertyName("houseNumber")]
-        public string HouseNumber { get; set; }
+        public string? HouseNumber { get; set; }
 
         [JsonPropertyName("road")]
-        public string Road { get; set; }
+        public string? Road { get; set; }
 
         [JsonPropertyName("postalCode")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
 
         [JsonPropertyName("city")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [JsonPropertyName("state")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         [JsonPropertyName("streetAddress")]
-        public string StreetAddress { get; set; }
+        public string? StreetAddress { get; set; }
     }
 }

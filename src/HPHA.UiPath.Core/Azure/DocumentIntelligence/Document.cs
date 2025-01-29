@@ -5,18 +5,18 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
     public class Document
     {
         [JsonPropertyName("docType")]
-        public string DocType { get; set; }
+        public string? DocType { get; set; }
 
         [JsonPropertyName("boundingRegions")]
-        public List<BoundingRegion> BoundingRegions { get; set; }
+        public List<BoundingRegion>? BoundingRegions { get; set; }
 
         [JsonPropertyName("fields")]
-        public Fields Fields { get; set; }
+        public Fields? Fields { get; set; }
 
         [JsonPropertyName("confidence")]
         public int? Confidence { get; set; }
 
         [JsonPropertyName("spans")]
-        public List<Span> Spans { get; set; }
+        public List<Span>? Spans { get; set; }
     }
 }

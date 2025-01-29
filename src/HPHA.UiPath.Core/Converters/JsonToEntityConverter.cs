@@ -30,28 +30,30 @@ namespace HPHA.UiPath.Core.Converters
                 var invoiceData = JsonSerializer.Deserialize<InvoiceDataSimplified>(jsonContent);
 
                 DateOnly? invoiceDate = null;
-                if (DateOnly.TryParse(invoiceData.InvoiceDate.ValueDate, out var parsedDate))
+                if (DateOnly.TryParse(invoiceData?.InvoiceDate?.ValueDate, out var parsedDate))
                 {
                     invoiceDate = parsedDate;
                 }
 
+                var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
+                {
+                    Amount = item.Amount?.ValueCurrency?.Amount,
+                    Description = item.Description?.ValueString,
+                    Quantity = item.Quantity?.ValueNumber,
+                    Tax = item.Tax?.ValueCurrency?.Amount,
+                    UnitPrice = item.UnitPrice?.ValueCurrency?.Amount
+                }).ToArray();
+
                 return new PurchaseOrderEntity
                 {
                     InvoiceDate = invoiceDate,
-                    InvoiceId = invoiceData.InvoiceId.ValueString,
-                    InvoiceTotal = invoiceData.InvoiceTotal.ValueCurrency.Amount,
-                    PurchaseOrder = invoiceData.PurchaseOrder.ValueString,
-                    SubTotal = invoiceData.SubTotal.ValueCurrency.Amount,
-                    TotalTax = invoiceData.TotalTax.ValueCurrency.Amount,
-                    Vendor = new() { Name = invoiceData.VendorName.ValueString },
-                    Items = [.. invoiceData.Items.Select(item => new PurchaseOrderItemEntity
-                    {
-                        Amount = item.Amount.ValueCurrency.Amount,
-                        Description = item.Description.ValueString,
-                        Quantity = item.Quantity.ValueNumber,
-                        Tax = item.Tax.ValueCurrency.Amount,
-                        UnitPrice = item.UnitPrice.ValueCurrency.Amount
-                    })]
+                    InvoiceId = invoiceData?.InvoiceId?.ValueString,
+                    InvoiceTotal = invoiceData?.InvoiceTotal?.ValueCurrency?.Amount,
+                    PurchaseOrder = invoiceData?.PurchaseOrder?.ValueString,
+                    SubTotal = invoiceData?.SubTotal?.ValueCurrency?.Amount,
+                    TotalTax = invoiceData?.TotalTax?.ValueCurrency?.Amount,
+                    Vendor = new() { Name = invoiceData?.VendorName?.ValueString },
+                    Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
                 };
             }
             catch (JsonException ex)
@@ -82,31 +84,33 @@ namespace HPHA.UiPath.Core.Converters
             {
                 var invoiceData = JsonSerializer.Deserialize<InvoiceDataDetailed>(jsonContent);
 
-                var fields = invoiceData.AnalyzeResult.Documents[0].Fields;
+                var fields = invoiceData?.AnalyzeResult?.Documents?[0].Fields;
 
                 DateOnly? invoiceDate = null;
-                if (DateOnly.TryParse(fields.InvoiceDate.ValueDate, out var parsedDate))
+                if (DateOnly.TryParse(fields?.InvoiceDate?.ValueDate, out var parsedDate))
                 {
                     invoiceDate = parsedDate;
                 }
 
+                var items = fields?.Items?.ValueArray?.Select(item => new PurchaseOrderItemEntity
+                {
+                    Amount = item.ValueObject?.Amount?.ValueCurrency?.Amount,
+                    Description = item.ValueObject?.Description?.ValueString,
+                    Quantity = item.ValueObject?.Quantity?.ValueNumber,
+                    Tax = item.ValueObject?.Tax?.ValueCurrency?.Amount,
+                    UnitPrice = item.ValueObject?.UnitPrice?.ValueCurrency?.Amount
+                }).ToArray();
+
                 return new PurchaseOrderEntity
                 {
                     InvoiceDate = invoiceDate,
-                    InvoiceId = fields.InvoiceId.ValueString,
-                    InvoiceTotal = fields.InvoiceTotal.ValueCurrency.Amount,
-                    PurchaseOrder = fields.PurchaseOrder.ValueString,
-                    SubTotal = fields.SubTotal.ValueCurrency.Amount,
-                    TotalTax = fields.TotalTax.ValueCurrency.Amount,
-                    Vendor = new() { Name = fields.VendorName.ValueString },
-                    Items = [.. fields.Items.ValueArray.Select(item => new PurchaseOrderItemEntity
-                    {
-                        Amount = item.ValueObject.Amount.ValueCurrency.Amount,
-                        Description = item.ValueObject.Description.ValueString,
-                        Quantity = item.ValueObject.Quantity.ValueNumber,
-                        Tax = item.ValueObject.Tax.ValueCurrency.Amount,
-                        UnitPrice = item.ValueObject.UnitPrice.ValueCurrency.Amount
-                    })]
+                    InvoiceId = fields?.InvoiceId?.ValueString,
+                    InvoiceTotal = fields?.InvoiceTotal?.ValueCurrency?.Amount,
+                    PurchaseOrder = fields?.PurchaseOrder?.ValueString,
+                    SubTotal = fields?.SubTotal?.ValueCurrency?.Amount,
+                    TotalTax = fields?.TotalTax?.ValueCurrency?.Amount,
+                    Vendor = new() { Name = fields?.VendorName?.ValueString },
+                    Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
                 };
             }
             catch (JsonException ex)

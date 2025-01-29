@@ -11,12 +11,12 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         public int? ColumnCount { get; set; }
 
         [JsonPropertyName("cells")]
-        public List<Cell> Cells { get; set; }
+        public List<Cell>? Cells { get; set; }
 
         [JsonPropertyName("boundingRegions")]
-        public List<BoundingRegion> BoundingRegions { get; set; }
+        public List<BoundingRegion>? BoundingRegions { get; set; }
 
         [JsonPropertyName("spans")]
-        public List<Span> Spans { get; set; }
+        public List<Span>? Spans { get; set; }
     }
 }

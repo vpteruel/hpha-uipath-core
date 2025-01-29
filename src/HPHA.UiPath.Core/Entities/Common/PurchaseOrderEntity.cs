@@ -11,8 +11,8 @@ namespace HPHA.UiPath.Core.Entities.Common
         public string? PurchaseOrder { get; set; }
         public double? SubTotal { get; set; }
         public double? TotalTax { get; set; }
-        public PurchaseOrderVendorEntity Vendor { get; set; }
-        public PurchaseOrderItemEntity[] Items { get; set; }
+        public PurchaseOrderVendorEntity? Vendor { get; set; }
+        public PurchaseOrderItemEntity[]? Items { get; set; }
         
         public string Number => InvoiceId ?? string.Empty;
     }

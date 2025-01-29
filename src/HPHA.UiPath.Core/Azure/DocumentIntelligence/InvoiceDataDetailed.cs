@@ -5,7 +5,7 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
     public class InvoiceDataDetailed
     {
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [JsonPropertyName("createdDateTime")]
         public DateTime? CreatedDateTime { get; set; }
@@ -14,6 +14,6 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         public DateTime? LastUpdatedDateTime { get; set; }
 
         [JsonPropertyName("analyzeResult")]
-        public AnalyzeResult AnalyzeResult { get; set; }
+        public AnalyzeResult? AnalyzeResult { get; set; }
     }
 }

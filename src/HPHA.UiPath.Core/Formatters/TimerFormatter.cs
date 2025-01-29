@@ -9,7 +9,7 @@ namespace HPHA.UiPath.Core.Formatters
         /// <returns></returns>
         public static List<string> GetTimeParts(TimeSpan timeSpan)
         {
-            List<string> parts = [];
+            List<string> parts = new();
 
             if (timeSpan.Days > 0)
                 parts.Add(string.Format("{0}d", timeSpan.Days));

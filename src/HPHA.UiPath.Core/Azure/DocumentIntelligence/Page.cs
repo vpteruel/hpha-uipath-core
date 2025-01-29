@@ -17,15 +17,15 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         public double? Height { get; set; }
 
         [JsonPropertyName("unit")]
-        public string Unit { get; set; }
+        public string? Unit { get; set; }
 
         [JsonPropertyName("words")]
-        public List<Word> Words { get; set; }
+        public List<Word>? Words { get; set; }
 
         [JsonPropertyName("lines")]
-        public List<Line> Lines { get; set; }
+        public List<Line>? Lines { get; set; }
 
         [JsonPropertyName("spans")]
-        public List<Span> Spans { get; set; }
+        public List<Span>? Spans { get; set; }
     }
 }

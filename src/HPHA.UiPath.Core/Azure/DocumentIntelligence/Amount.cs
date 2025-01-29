@@ -5,21 +5,21 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
     public class Amount
     {
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         [JsonPropertyName("valueCurrency")]
-        public ValueCurrency ValueCurrency { get; set; }
+        public ValueCurrency? ValueCurrency { get; set; }
 
         [JsonPropertyName("content")]
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         [JsonPropertyName("boundingRegions")]
-        public List<BoundingRegion> BoundingRegions { get; set; }
+        public List<BoundingRegion>? BoundingRegions { get; set; }
 
         [JsonPropertyName("confidence")]
         public double? Confidence { get; set; }
 
         [JsonPropertyName("spans")]
-        public List<Span> Spans { get; set; }
+        public List<Span>? Spans { get; set; }
     }
 }
