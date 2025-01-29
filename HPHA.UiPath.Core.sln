@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPHA.UiPath.Core", "src\HPHA.UiPath.Core\HPHA.UiPath.Core.csproj", "{5238B143-806A-4D92-BEFC-F4FBF56B0303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPHA.UiPath.Core.UnitTests", "tests\HPHA.UiPath.Core.UnitTests\HPHA.UiPath.Core.UnitTests.csproj", "{20923E34-E357-4FBE-84E4-F8C1496CABCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5238B143-806A-4D92-BEFC-F4FBF56B0303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5238B143-806A-4D92-BEFC-F4FBF56B0303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5238B143-806A-4D92-BEFC-F4FBF56B0303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5238B143-806A-4D92-BEFC-F4FBF56B0303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,118 @@
+using System.Text;
+using System.Text.Json;
+using HPHA.UiPath.Core.Azure.DocumentIntelligence;
+using HPHA.UiPath.Core.Entities.Common;
+
+namespace HPHA.UiPath.Core.Converters
+{
+    public static class JsonToEntityConverter
+    {
+        /// <summary>
+        /// Converts a simplified JSON file to a PurchaseOrderEntity.
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static PurchaseOrderEntity ConvertSimplifiedJsonToPurchaseOrderEntity(FileInfo fileInfo)
+        {
+            if (fileInfo == null || !fileInfo.Exists)
+                throw new FileNotFoundException("File not found.", fileInfo?.FullName);
+
+            try
+            {
+                string jsonContent;
+                using (StreamReader reader = new(fileInfo.FullName, Encoding.UTF8))
+                {
+                    jsonContent = reader.ReadToEnd();
+                }
+
+                var invoiceData = JsonSerializer.Deserialize<InvoiceDataSimplified>(jsonContent);
+
+                DateOnly? invoiceDate = null;
+                if (DateOnly.TryParse(invoiceData.InvoiceDate.ValueDate, out var parsedDate))
+                {
+                    invoiceDate = parsedDate;
+                }
+
+                return new PurchaseOrderEntity
+                {
+                    InvoiceDate = invoiceDate,
+                    InvoiceId = invoiceData.InvoiceId.ValueString,
+                    InvoiceTotal = invoiceData.InvoiceTotal.ValueCurrency.Amount,
+                    PurchaseOrder = invoiceData.PurchaseOrder.ValueString,
+                    SubTotal = invoiceData.SubTotal.ValueCurrency.Amount,
+                    TotalTax = invoiceData.TotalTax.ValueCurrency.Amount,
+                    Vendor = new() { Name = invoiceData.VendorName.ValueString },
+                    Items = [.. invoiceData.Items.Select(item => new PurchaseOrderItemEntity
+                    {
+                        Amount = item.Amount.ValueCurrency.Amount,
+                        Description = item.Description.ValueString,
+                        Quantity = item.Quantity.ValueNumber,
+                        Tax = item.Tax.ValueCurrency.Amount,
+                        UnitPrice = item.UnitPrice.ValueCurrency.Amount
+                    })]
+                };
+            }
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException("Deserialization failed.", ex);
+            }
+        }
+
+        /// <summary>
+        /// Converts a detailed JSON file to a PurchaseOrderEntity.
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static PurchaseOrderEntity ConvertDetailedJsonToPurchaseOrderEntity(FileInfo fileInfo)
+        {
+            if (fileInfo == null || !fileInfo.Exists)
+                throw new FileNotFoundException("File not found.", fileInfo?.FullName);
+
+            string jsonContent;
+            using (StreamReader reader = new(fileInfo.FullName, Encoding.UTF8))
+            {
+                jsonContent = reader.ReadToEnd();
+            }
+
+            try
+            {
+                var invoiceData = JsonSerializer.Deserialize<InvoiceDataDetailed>(jsonContent);
+
+                var fields = invoiceData.AnalyzeResult.Documents[0].Fields;
+
+                DateOnly? invoiceDate = null;
+                if (DateOnly.TryParse(fields.InvoiceDate.ValueDate, out var parsedDate))
+                {
+                    invoiceDate = parsedDate;
+                }
+
+                return new PurchaseOrderEntity
+                {
+                    InvoiceDate = invoiceDate,
+                    InvoiceId = fields.InvoiceId.ValueString,
+                    InvoiceTotal = fields.InvoiceTotal.ValueCurrency.Amount,
+                    PurchaseOrder = fields.PurchaseOrder.ValueString,
+                    SubTotal = fields.SubTotal.ValueCurrency.Amount,
+                    TotalTax = fields.TotalTax.ValueCurrency.Amount,
+                    Vendor = new() { Name = fields.VendorName.ValueString },
+                    Items = [.. fields.Items.ValueArray.Select(item => new PurchaseOrderItemEntity
+                    {
+                        Amount = item.ValueObject.Amount.ValueCurrency.Amount,
+                        Description = item.ValueObject.Description.ValueString,
+                        Quantity = item.ValueObject.Quantity.ValueNumber,
+                        Tax = item.ValueObject.Tax.ValueCurrency.Amount,
+                        UnitPrice = item.ValueObject.UnitPrice.ValueCurrency.Amount
+                    })]
+                };
+            }
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException("Deserialization failed.", ex);
+            }
+        }
+    }
+}
