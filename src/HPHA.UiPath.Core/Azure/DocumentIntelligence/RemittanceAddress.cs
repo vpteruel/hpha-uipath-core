@@ -20,6 +20,6 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         public List<Span>? Spans { get; set; }
 
         [JsonPropertyName("valueAddress")]
-        public string? ValueString { get; set; }
+        public ValueAddress? ValueAddress { get; set; }
     }
 }

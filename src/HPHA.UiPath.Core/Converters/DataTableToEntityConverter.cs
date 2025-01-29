@@ -13,9 +13,6 @@ namespace HPHA.UiPath.Core.Converters
         /// <exception cref="ArgumentNullException"></exception>
         public static PurchaseOrderEntity[] ConvertToPurchaseOrderEntities(DataTable table)
         {
-            if (table == null)
-                throw new ArgumentNullException(nameof(table), "The provided DataTable cannot be null.");
-
             var purchaseOrders = table.AsEnumerable()
                 .GroupBy(row => row.Field<string>("PO #"))
                 .Select(poGroup => new PurchaseOrderEntity

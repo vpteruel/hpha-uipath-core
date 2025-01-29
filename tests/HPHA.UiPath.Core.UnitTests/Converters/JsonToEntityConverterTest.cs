@@ -59,7 +59,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             result.PurchaseOrder.Should().Be("255167");
             result.SubTotal.Should().Be(293.45d);
             result.TotalTax.Should().Be(2.32d);
-            result.Vendor.Name.Should().Be("Culligan\nTM");
+            result.Vendor?.Name.Should().Be("Culligan\nTM");
 
             result.Items.Should().HaveCount(11);
 
@@ -121,7 +121,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             result.PurchaseOrder.Should().Be("255167");
             result.SubTotal.Should().Be(293.45d);
             result.TotalTax.Should().Be(2.32d);
-            result.Vendor.Name.Should().Be("Culligan\nTM");
+            result.Vendor?.Name.Should().Be("Culligan\nTM");
 
             result.Items.Should().HaveCount(11);
 

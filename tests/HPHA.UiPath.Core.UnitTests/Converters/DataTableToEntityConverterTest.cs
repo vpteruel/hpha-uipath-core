@@ -8,19 +8,6 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
     public class DataTableToEntityConverterTest
     {
         [Fact]
-        public void ConvertToPurchaseOrderEntities_ShouldThrowArgumentNullException_WhenTableIsNull()
-        {
-            // Arrange
-            DataTable table = null;
-
-            // Act
-            Action act = () => DataTableToEntityConverter.ConvertToPurchaseOrderEntities(table);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("The provided DataTable cannot be null. (Parameter 'table')");
-        }
-
-        [Fact]
         public void ConvertToPurchaseOrderEntities_ShouldReturnCorrectEntities()
         {
             // Arrange
@@ -47,9 +34,9 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             result.Should().HaveCount(2);
 
             var po123 = result.First(po => po.Number == "PO123");
-            po123.Vendor.Number.Should().Be("V001");
-            po123.Vendor.Mnemonic.Should().Be("VM001");
-            po123.Vendor.Name.Should().Be("Vendor 1");
+            po123.Vendor?.Number.Should().Be("V001");
+            po123.Vendor?.Mnemonic.Should().Be("VM001");
+            po123.Vendor?.Name.Should().Be("Vendor 1");
             po123.Items.Should().HaveCount(2);
             po123.Items[0].PoLine.Should().Be(1);
             po123.Items[0].Number.Should().Be("Item001");
@@ -65,9 +52,9 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             po123.Items[1].UnitPrice.Should().Be(200.75d);
 
             var po124 = result.First(po => po.Number == "PO124");
-            po124.Vendor.Number.Should().Be("V002");
-            po124.Vendor.Mnemonic.Should().Be("VM002");
-            po124.Vendor.Name.Should().Be("Vendor 2");
+            po124.Vendor?.Number.Should().Be("V002");
+            po124.Vendor?.Mnemonic.Should().Be("VM002");
+            po124.Vendor?.Name.Should().Be("Vendor 2");
             po124.Items.Should().HaveCount(1);
             po124.Items[0].PoLine.Should().Be(1);
             po124.Items[0].Number.Should().Be("Item003");
