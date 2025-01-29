@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using HPHA.UiPath.Core.Azure.DocumentIntelligence;
 
 namespace HPHA.UiPath.Core.Entities.Common
 {
