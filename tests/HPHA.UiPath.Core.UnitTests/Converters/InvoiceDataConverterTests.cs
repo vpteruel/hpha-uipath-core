@@ -1,6 +1,6 @@
 using FluentAssertions;
-using HPHA.UiPath.Core.Azure.DocumentIntelligence;
 using HPHA.UiPath.Core.Converters;
+using D = HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
@@ -10,36 +10,36 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
         public void ConvertDetailedToSimplified_ShouldConvertCorrectly()
         {
             // Arrange
-            var detailed = new InvoiceDataDetailed
+            D.InvoiceData detailed = new()
             {
-                AnalyzeResult = new AnalyzeResult
+                AnalyzeResult = new()
                 {
                     Documents =
                     [
-                        new Document
+                        new()
                         {
-                            Fields = new Fields
+                            Fields = new()
                             {
-                                InvoiceDate = new InvoiceDate { ValueDate = "2023-10-01" },
-                                InvoiceId = new InvoiceId { ValueString = "INV123" },
-                                InvoiceTotal = new InvoiceTotal { ValueCurrency = new ValueCurrency { Amount = 100.0 } },
-                                PurchaseOrder = new PurchaseOrder { ValueString = "PO123" },
-                                SubTotal = new SubTotal { ValueCurrency = new ValueCurrency { Amount = 90.0 } },
-                                TotalTax = new TotalTax { ValueCurrency = new ValueCurrency { Amount = 10.0 } },
-                                VendorName = new VendorName { ValueString = "Vendor Inc." },
-                                Items = new Items
+                                InvoiceDate = new() { ValueDate = "2023-10-01" },
+                                InvoiceId = new() { ValueString = "INV123" },
+                                InvoiceTotal = new() { ValueCurrency = new() { Amount = 100.0 } },
+                                PurchaseOrder = new() { ValueString = "PO123" },
+                                SubTotal = new() { ValueCurrency = new() { Amount = 90.0 } },
+                                TotalTax = new() { ValueCurrency = new() { Amount = 10.0 } },
+                                VendorName = new() { ValueString = "Vendor Inc." },
+                                Items = new()
                                 {
                                     ValueArray =
                                     [
                                         new()
                                         {
-                                            ValueObject = new ValueObject
+                                            ValueObject = new()
                                             {
-                                                Amount = new Amount { ValueCurrency = new ValueCurrency { Amount = 50.0 } },
-                                                Description = new Description { ValueString = "Item 1" },
-                                                Quantity = new Quantity { ValueNumber = 1 },
-                                                Tax = new Tax { ValueCurrency = new ValueCurrency { Amount = 5.0 } },
-                                                UnitPrice = new UnitPrice { ValueCurrency = new ValueCurrency { Amount = 50.0 } }
+                                                Amount = new() { ValueCurrency = new() { Amount = 50.0 } },
+                                                Description = new() { ValueString = "Item 1" },
+                                                Quantity = new() { ValueNumber = 1 },
+                                                Tax = new() { ValueCurrency = new() { Amount = 5.0 } },
+                                                UnitPrice = new() { ValueCurrency = new() { Amount = 50.0 } }
                                             }
                                         }
                                     ]
@@ -56,18 +56,18 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
 
             // Assert
             simplified.Should().NotBeNull();
-            simplified.InvoiceDate.Should().Be(fields?.InvoiceDate);
-            simplified.InvoiceId.Should().Be(fields?.InvoiceId);
-            simplified.InvoiceTotal.Should().Be(fields?.InvoiceTotal);
-            simplified.PurchaseOrder.Should().Be(fields?.PurchaseOrder);
-            simplified.SubTotal.Should().Be(fields?.SubTotal);
-            simplified.TotalTax.Should().Be(fields?.TotalTax);
-            simplified.VendorName.Should().Be(fields?.VendorName);
+            simplified.InvoiceDate?.ValueDate.Should().Be(fields?.InvoiceDate?.ValueDate);
+            simplified.InvoiceId?.ValueString.Should().Be(fields?.InvoiceId?.ValueString);
+            simplified.InvoiceTotal?.ValueCurrency?.Amount.Should().Be(fields?.InvoiceTotal?.ValueCurrency?.Amount);
+            simplified.PurchaseOrder?.ValueString.Should().Be(fields?.PurchaseOrder?.ValueString);
+            simplified.SubTotal?.ValueCurrency?.Amount.Should().Be(fields?.SubTotal?.ValueCurrency?.Amount);
+            simplified.TotalTax?.ValueCurrency?.Amount.Should().Be(fields?.TotalTax?.ValueCurrency?.Amount);
+            simplified.VendorName?.ValueString.Should().Be(fields?.VendorName?.ValueString);
             simplified.Items.Should().HaveCount(1);
         }
 
         [Theory]
-        [InlineData("Converters/Json/01JJVPZTSD38E959DYVXXDFJRH_d.json", "619649554", "256494", 6)]
+        [InlineData("Converters/Json/AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json", "619649554", "256494", 6)]
         [InlineData("Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json", "DEC24-HPHA", "255167", 11)]
         public void ReadDetailedJsonFile_ShouldReadAndDeserializeCorrectly(
             string detailedJsonPath
@@ -93,7 +93,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
         }
 
         [Theory]
-        [InlineData("Converters/Json/01JJVPZTSD38E959DYVXXDFJRH_d.json", "619649554", "256494", 6)]
+        [InlineData("Converters/Json/AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json", "619649554", "256494", 6)]
         [InlineData("Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json", "DEC24-HPHA", "255167", 11)]
         public void ReadAndConvertDetailedJsonToSimplified_ShouldConvertCorrectly(
             string detailedJsonPath

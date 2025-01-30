@@ -1,7 +1,8 @@
 using System.Text;
 using System.Text.Json;
-using HPHA.UiPath.Core.Azure.DocumentIntelligence;
 using HPHA.UiPath.Core.Entities.Common;
+using S = HPHA.UiPath.Core.Azure.DocumentIntelligence.Simplified;
+using D = HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed;
 
 namespace HPHA.UiPath.Core.Converters
 {
@@ -27,7 +28,7 @@ namespace HPHA.UiPath.Core.Converters
 
             try
             {
-                var invoiceData = JsonSerializer.Deserialize<InvoiceDataSimplified>(jsonContent)
+                var invoiceData = JsonSerializer.Deserialize<S.InvoiceData>(jsonContent)
                     ?? throw new InvalidOperationException("Deserialization failed.");
 
                 return ConvertSimplifiedToPurchaseOrderEntity(invoiceData);
@@ -38,7 +39,7 @@ namespace HPHA.UiPath.Core.Converters
             }
         }
 
-        private static PurchaseOrderEntity ConvertSimplifiedToPurchaseOrderEntity(InvoiceDataSimplified invoiceData)
+        private static PurchaseOrderEntity ConvertSimplifiedToPurchaseOrderEntity(S.InvoiceData invoiceData)
         {
             DateOnly? invoiceDate = null;
             if (DateOnly.TryParse(invoiceData?.InvoiceDate?.ValueDate, out var parsedDate))
@@ -88,7 +89,7 @@ namespace HPHA.UiPath.Core.Converters
 
             try
             {
-                var invoiceData = JsonSerializer.Deserialize<InvoiceDataDetailed>(jsonContent)
+                var invoiceData = JsonSerializer.Deserialize<D.InvoiceData>(jsonContent)
                     ?? throw new InvalidOperationException("Deserialization failed.");
 
                 return ConvertDetailedToPurchaseOrderEntity(invoiceData);
@@ -99,7 +100,7 @@ namespace HPHA.UiPath.Core.Converters
             }
         }
 
-        private static PurchaseOrderEntity ConvertDetailedToPurchaseOrderEntity(InvoiceDataDetailed invoiceData)
+        private static PurchaseOrderEntity ConvertDetailedToPurchaseOrderEntity(D.InvoiceData invoiceData)
         {
             var fields = invoiceData?.AnalyzeResult?.Documents?[0].Fields;
 
