@@ -8,6 +8,11 @@ namespace HPHA.UiPath.Core.Converters
 {
     public static class JsonToEntityConverter
     {
+        private static JsonSerializerOptions _options = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
         /// <summary>
         /// Converts a simplified JSON file to a PurchaseOrderEntity.
         /// </summary>
@@ -28,7 +33,7 @@ namespace HPHA.UiPath.Core.Converters
 
             try
             {
-                var invoiceData = JsonSerializer.Deserialize<S.InvoiceData>(jsonContent)
+                var invoiceData = JsonSerializer.Deserialize<S.InvoiceData>(jsonContent, _options)
                     ?? throw new InvalidOperationException("Deserialization failed.");
 
                 return ConvertSimplifiedToPurchaseOrderEntity(invoiceData);
@@ -89,7 +94,7 @@ namespace HPHA.UiPath.Core.Converters
 
             try
             {
-                var invoiceData = JsonSerializer.Deserialize<D.InvoiceData>(jsonContent)
+                var invoiceData = JsonSerializer.Deserialize<D.InvoiceData>(jsonContent, _options)
                     ?? throw new InvalidOperationException("Deserialization failed.");
 
                 return ConvertDetailedToPurchaseOrderEntity(invoiceData);

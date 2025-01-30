@@ -1,0 +1,430 @@
+{
+  "InvoiceDate": {
+    "Type": "date",
+    "ValueDate": "2025-01-29",
+    "Content": "01/29/2025",
+    "Confidence": 0.948
+  },
+  "InvoiceId": {
+    "Type": "string",
+    "ValueString": "619649554",
+    "Content": "619649554",
+    "Confidence": 0.95
+  },
+  "InvoiceTotal": {
+    "Type": "currency",
+    "ValueCurrency": {
+      "CurrencySymbol": "CAD",
+      "Amount": 142.63,
+      "CurrencyCode": "CAD"
+    },
+    "Content": "$142.63 CAD",
+    "Confidence": 0.805
+  },
+  "PurchaseOrder": {
+    "Type": "string",
+    "ValueString": "256494",
+    "Content": "256494",
+    "Confidence": 0.938
+  },
+  "SubTotal": {
+    "Type": null,
+    "ValueCurrency": {
+      "CurrencySymbol": null,
+      "Amount": null,
+      "CurrencyCode": null
+    },
+    "Content": null,
+    "Confidence": null
+  },
+  "TotalTax": {
+    "Type": "currency",
+    "ValueCurrency": {
+      "CurrencySymbol": "$",
+      "Amount": 15.47,
+      "CurrencyCode": "CAD"
+    },
+    "Content": "$15.47",
+    "Confidence": 0.798
+  },
+  "VendorName": {
+    "Type": "string",
+    "ValueString": "Abbott",
+    "Content": "Abbott",
+    "Confidence": 0.95
+  },
+  "Items": [
+    {
+      "Amount": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 8.16,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "8.16",
+        "Confidence": 0.923
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "ISO NGMO 59ML BTL\n48CT CND",
+        "Content": "ISO NGMO 59ML BTL\n48CT CND",
+        "Confidence": 0.939
+      },
+      "ProductCode": {
+        "Type": "string",
+        "ValueString": "6647513\nGTIN 10055325621772",
+        "Content": "6647513\nGTIN 10055325621772",
+        "Confidence": 0.755
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": "number",
+        "ValueNumber": 1,
+        "Content": "1",
+        "Confidence": 0.493
+      },
+      "Tax": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 0.0,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "0.00\n0.00",
+        "Confidence": 0.297
+      },
+      "UnitPrice": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 8.16,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "8.16",
+        "Confidence": 0.909
+      }
+    },
+    {
+      "Amount": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 94.92,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "94.92",
+        "Confidence": 0.922
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "CUSTOMFD BSTMLK BTL\n60ML W/CAP 100C",
+        "Content": "CUSTOMFD BSTMLK BTL\n60ML W/CAP 100C",
+        "Confidence": 0.938
+      },
+      "ProductCode": {
+        "Type": "string",
+        "ValueString": "6696213\nGTIN 10055325001611",
+        "Content": "6696213\nGTIN 10055325001611",
+        "Confidence": 0.752
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": "number",
+        "ValueNumber": 7,
+        "Content": "7",
+        "Confidence": 0.381
+      },
+      "Tax": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 10.92,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "10.92\n0.00",
+        "Confidence": 0.293
+      },
+      "UnitPrice": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 12.0,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "12.00",
+        "Confidence": 0.899
+      }
+    },
+    {
+      "Amount": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 39.55,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "39.55",
+        "Confidence": 0.922
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "SIM STAND TWIST NPL\nAND RNG 250CT H",
+        "Content": "SIM STAND TWIST NPL\nAND RNG 250CT H",
+        "Confidence": 0.943
+      },
+      "ProductCode": {
+        "Type": "string",
+        "ValueString": "00079",
+        "Content": "00079",
+        "Confidence": 0.882
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": "number",
+        "ValueNumber": 1,
+        "Content": "1",
+        "Confidence": 0.399
+      },
+      "Tax": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 0.0,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "4.55\n0.00",
+        "Confidence": 0.295
+      },
+      "UnitPrice": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": 35.0,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "35.00",
+        "Confidence": 0.9
+      }
+    },
+    {
+      "Amount": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": "$",
+          "Amount": 127.16,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "$127.16",
+        "Confidence": 0.592
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "Total partiel",
+        "Content": "Total partiel",
+        "Confidence": 0.358
+      },
+      "ProductCode": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": null,
+        "ValueNumber": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Tax": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      },
+      "UnitPrice": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      }
+    },
+    {
+      "Amount": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "Surcharge",
+        "Content": "Surcharge",
+        "Confidence": 0.507
+      },
+      "ProductCode": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": null,
+        "ValueNumber": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Tax": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      },
+      "UnitPrice": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      }
+    },
+    {
+      "Amount": {
+        "Type": "currency",
+        "ValueCurrency": {
+          "CurrencySymbol": "$",
+          "Amount": 0.0,
+          "CurrencyCode": "CAD"
+        },
+        "Content": "$0.00",
+        "Confidence": 0.722
+      },
+      "Date": {
+        "Type": null,
+        "ValueDate": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Description": {
+        "Type": "string",
+        "ValueString": "Frais supplémentaires",
+        "Content": "Frais supplémentaires",
+        "Confidence": 0.502
+      },
+      "ProductCode": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "PurchaseOrder": {
+        "Type": null,
+        "ValueString": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Quantity": {
+        "Type": null,
+        "ValueNumber": null,
+        "Content": null,
+        "Confidence": null
+      },
+      "Tax": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      },
+      "UnitPrice": {
+        "Type": null,
+        "ValueCurrency": {
+          "CurrencySymbol": null,
+          "Amount": null,
+          "CurrencyCode": null
+        },
+        "Content": null,
+        "Confidence": null
+      }
+    }
+  ]
+}

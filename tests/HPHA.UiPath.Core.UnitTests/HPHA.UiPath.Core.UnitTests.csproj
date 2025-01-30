@@ -8,6 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.2" />
+    <PackageReference Include="FluentAssertions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HPHA.UiPath.Core\HPHA.UiPath.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json" />
     <None Remove="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_s.json" />
     <None Remove="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_d.json" />
@@ -27,22 +43,6 @@
     <Content Include="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_s.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.2" />
-    <PackageReference Include="FluentAssertions" Version="8.0.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="xunit" Version="2.9.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\HPHA.UiPath.Core\HPHA.UiPath.Core.csproj" />
   </ItemGroup>
 
 </Project>
