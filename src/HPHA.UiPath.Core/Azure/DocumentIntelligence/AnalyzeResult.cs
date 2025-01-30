@@ -13,6 +13,7 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         [JsonPropertyName("stringIndexType")]
         public string? StringIndexType { get; set; }
 
+        [JsonIgnore]
         [JsonPropertyName("content")]
         public string? Content { get; set; }
 

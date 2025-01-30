@@ -6,8 +6,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
 {
     public class JsonToEntityConverterTest
     {
-        private readonly string _simplifiedJsonPath = "Converters/Json/simplified-invoice-data.json";
-        private readonly string _detailedJsonPath = "Converters/Json/detailed-invoice-data.json";
+        private readonly string _simplifiedJsonPath = "Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_s.json";
+        private readonly string _detailedJsonPath = "Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json";
 
         [Fact]
         public void ConvertSimplifiedJsonToPurchaseOrderEntity_ShouldThrowFileNotFoundException_WhenFileDoesNotExist()

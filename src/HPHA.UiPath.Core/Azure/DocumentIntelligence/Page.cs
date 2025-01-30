@@ -11,7 +11,7 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         public double? Angle { get; set; }
 
         [JsonPropertyName("width")]
-        public int? Width { get; set; }
+        public double? Width { get; set; }
 
         [JsonPropertyName("height")]
         public double? Height { get; set; }

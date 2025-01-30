@@ -1,17 +1,11 @@
-using System;
-using System.IO;
-using System.Text.Json;
 using FluentAssertions;
 using HPHA.UiPath.Core.Azure.DocumentIntelligence;
 using HPHA.UiPath.Core.Converters;
-using Xunit;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
     public class InvoiceDataConverterTests
     {
-        private readonly string _detailedJsonPath = "Converters/Json/detailed-invoice-data.json";
-
         [Fact]
         public void ConvertDetailedToSimplified_ShouldConvertCorrectly()
         {
@@ -72,11 +66,17 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             simplified.Items.Should().HaveCount(1);
         }
 
-        [Fact]
-        public void ReadDetailedJsonFile_ShouldReadAndDeserializeCorrectly()
+        [Theory]
+        [InlineData("Converters/Json/01JJVPZTSD38E959DYVXXDFJRH_d.json", "619649554", "256494", 6)]
+        [InlineData("Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json", "DEC24-HPHA", "255167", 11)]
+        public void ReadDetailedJsonFile_ShouldReadAndDeserializeCorrectly(
+            string detailedJsonPath
+            , string invoiceId
+            , string purchaseOrder
+            , int itemsCount)
         {
             // Arrange
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _detailedJsonPath);
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, detailedJsonPath);
             var fileInfo = new FileInfo(filePath);
 
             // Act
@@ -87,17 +87,22 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             detailed.Status.Should().Be("succeeded");
             detailed.AnalyzeResult.Should().NotBeNull();
             detailed.AnalyzeResult.Documents.Should().HaveCount(1);
-            detailed.AnalyzeResult.Documents[0].Fields?.InvoiceId?.ValueString.Should().Be("DEC24-HPHA");
-
-            // Cleanup
-            File.Delete(filePath);
+            detailed.AnalyzeResult.Documents[0].Fields?.InvoiceId?.ValueString.Should().Be(invoiceId);
+            detailed.AnalyzeResult.Documents[0].Fields?.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
+            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray.Should().HaveCount(itemsCount);
         }
 
-        [Fact]
-        public void ReadAndConvertDetailedJsonToSimplified_ShouldConvertCorrectly()
+        [Theory]
+        [InlineData("Converters/Json/01JJVPZTSD38E959DYVXXDFJRH_d.json", "619649554", "256494", 6)]
+        [InlineData("Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json", "DEC24-HPHA", "255167", 11)]
+        public void ReadAndConvertDetailedJsonToSimplified_ShouldConvertCorrectly(
+            string detailedJsonPath
+            , string invoiceId
+            , string purchaseOrder
+            , int itemsCount)
         {
             // Arrange
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _detailedJsonPath);
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, detailedJsonPath);
             var fileInfo = new FileInfo(filePath);
 
             // Act
@@ -105,11 +110,9 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
 
             // Assert
             simplified.Should().NotBeNull();
-            simplified.InvoiceId?.ValueString.Should().Be("DEC24-HPHA");
-            simplified.Items.Should().HaveCount(11);
-
-            // Cleanup
-            File.Delete(filePath);
+            simplified.InvoiceId?.ValueString.Should().Be(invoiceId);
+            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
+            simplified.Items.Should().HaveCount(itemsCount);
         }
     }
 }
