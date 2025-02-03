@@ -1,69 +1,52 @@
 using FluentAssertions;
 using HPHA.UiPath.Core.Converters;
-using D = HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
     public class InvoiceDataConverterTests
     {
-        [Fact]
-        public void ConvertDetailedToSimplified_ShouldConvertCorrectly()
+        [Theory]
+        [InlineData("Converters/Json/01JJVQBRGKR77SZCFBYND9NB0V_d.json", "255167")]
+        [InlineData("Converters/Json/AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json", "256494")]
+        [InlineData("Converters/Json/sj9SScj5Clox6_m7_d.json", "256746")]
+        public void ConvertDetailedToSimplified_ShouldConvertCorrectly(string detailedJsonPath, string purchaseOrder)
         {
             // Arrange
-            D.InvoiceData detailed = new()
-            {
-                AnalyzeResult = new()
-                {
-                    Documents =
-                    [
-                        new()
-                        {
-                            Fields = new()
-                            {
-                                InvoiceDate = new() { ValueDate = "2023-10-01" },
-                                InvoiceId = new() { ValueString = "INV123" },
-                                InvoiceTotal = new() { ValueCurrency = new() { Amount = 100.0 } },
-                                PurchaseOrder = new() { ValueString = "PO123" },
-                                SubTotal = new() { ValueCurrency = new() { Amount = 90.0 } },
-                                TotalTax = new() { ValueCurrency = new() { Amount = 10.0 } },
-                                VendorName = new() { ValueString = "Vendor Inc." },
-                                Items = new()
-                                {
-                                    ValueArray =
-                                    [
-                                        new()
-                                        {
-                                            ValueObject = new()
-                                            {
-                                                Amount = new() { ValueCurrency = new() { Amount = 50.0 } },
-                                                Description = new() { ValueString = "Item 1" },
-                                                Quantity = new() { ValueNumber = 1 },
-                                                Tax = new() { ValueCurrency = new() { Amount = 5.0 } },
-                                                UnitPrice = new() { ValueCurrency = new() { Amount = 50.0 } }
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
-                }
-            };
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, detailedJsonPath);
+            var fileInfo = new FileInfo(filePath);
+            
+            var detailed = InvoiceDataConverter.ReadDetailedJsonFile(fileInfo);
+            var fields = detailed?.AnalyzeResult?.Documents?[0].Fields;
 
             // Act
             var simplified = InvoiceDataConverter.ConvertDetailedToSimplified(detailed);
-            var fields = detailed.AnalyzeResult.Documents[0].Fields;
 
             // Assert
             simplified.Should().NotBeNull();
             simplified.InvoiceDate?.ValueDate.Should().Be(fields?.InvoiceDate?.ValueDate);
             simplified.InvoiceId?.ValueString.Should().Be(fields?.InvoiceId?.ValueString);
             simplified.InvoiceTotal?.ValueCurrency?.Amount.Should().Be(fields?.InvoiceTotal?.ValueCurrency?.Amount);
-            simplified.PurchaseOrder?.ValueString.Should().Be(fields?.PurchaseOrder?.ValueString);
+            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
             simplified.SubTotal?.ValueCurrency?.Amount.Should().Be(fields?.SubTotal?.ValueCurrency?.Amount);
             simplified.TotalTax?.ValueCurrency?.Amount.Should().Be(fields?.TotalTax?.ValueCurrency?.Amount);
             simplified.VendorName?.ValueString.Should().Be(fields?.VendorName?.ValueString);
-            simplified.Items.Should().HaveCount(1);
+            simplified.Items.Should().HaveCount(fields?.Items?.ValueArray?.Count ?? 0);
+        }
+
+        [Theory]
+        [InlineData("Converters/Json/sj9SScj5Clox6_m7_d.json", "256746")]
+        public void ConvertYourOrderNumberToPurchaseNumber_ShouldConvertCorrectly(string detailedJsonPath, string purchaseOrder)
+        {
+            // Arrange
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, detailedJsonPath);
+            var fileInfo = new FileInfo(filePath);
+
+            // Act
+            var simplified = InvoiceDataConverter.ReadAndConvertDetailedJsonToSimplified(fileInfo);
+
+            // Assert
+            simplified.Should().NotBeNull();
+            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
         }
 
         [Theory]

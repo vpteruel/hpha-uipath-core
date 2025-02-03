@@ -51,5 +51,13 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed
 
         [JsonPropertyName("VendorName")]
         public VendorName? VendorName { get; set; }
+
+        // Query fields
+
+        [JsonPropertyName("CUSTOMER_REFERENCE")]
+        public PurchaseOrder? CustomerReference { get; set; }
+
+        [JsonPropertyName("YOUR_ORDER_NUMBER")]
+        public PurchaseOrder? YourOrderNumber { get; set; }
     }
 }

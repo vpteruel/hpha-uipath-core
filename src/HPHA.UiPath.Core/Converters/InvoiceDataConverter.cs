@@ -49,13 +49,7 @@ namespace HPHA.UiPath.Core.Converters
                         CurrencySymbol = fields?.InvoiceTotal?.ValueCurrency?.CurrencySymbol
                     }
                 },
-                PurchaseOrder = new()
-                {
-                    Confidence = fields?.PurchaseOrder?.Confidence,
-                    Content = fields?.PurchaseOrder?.Content,
-                    Type = fields?.PurchaseOrder?.Type,
-                    ValueString = fields?.PurchaseOrder?.ValueString
-                },
+                PurchaseOrder = GetPurchaseOrder(fields),
                 SubTotal = new()
                 {
                     Confidence = fields?.SubTotal?.Confidence,
@@ -162,6 +156,41 @@ namespace HPHA.UiPath.Core.Converters
                     }
                 }).ToList()
             };
+        }
+
+        private static S.PurchaseOrder GetPurchaseOrder(D.Fields? fields)
+        {
+            var purchaseOrder = new S.PurchaseOrder
+            {
+                Confidence = fields?.PurchaseOrder?.Confidence ?? 0,
+                Content = fields?.PurchaseOrder?.Content,
+                Type = fields?.PurchaseOrder?.Type,
+                ValueString = fields?.PurchaseOrder?.ValueString
+            };
+
+            if (fields?.CustomerReference?.Confidence > purchaseOrder.Confidence)
+            {
+                purchaseOrder = new()
+                {
+                    Confidence = fields?.CustomerReference?.Confidence,
+                    Content = fields?.CustomerReference?.Content,
+                    Type = fields?.CustomerReference?.Type,
+                    ValueString = fields?.CustomerReference?.ValueString
+                };
+            }
+
+            if (fields?.YourOrderNumber?.Confidence > purchaseOrder.Confidence)
+            {
+                purchaseOrder = new()
+                {
+                    Confidence = fields?.YourOrderNumber?.Confidence,
+                    Content = fields?.YourOrderNumber?.Content,
+                    Type = fields?.YourOrderNumber?.Type,
+                    ValueString = fields?.YourOrderNumber?.ValueString
+                };
+            }
+
+            return purchaseOrder;
         }
 
         /// <summary>
