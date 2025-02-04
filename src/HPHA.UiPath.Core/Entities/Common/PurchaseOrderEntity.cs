@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using HPHA.UiPath.Core.Azure.DocumentIntelligence;
 
 namespace HPHA.UiPath.Core.Entities.Common
 {
@@ -8,6 +7,7 @@ namespace HPHA.UiPath.Core.Entities.Common
     {
         public DateOnly? InvoiceDate { get; set; }
         public string? InvoiceId { get; set; }
+        public string? InvoiceNumber => InvoiceId;
         public double? InvoiceTotal { get; set; }
         public string? PurchaseOrder { get; set; }
         public double? SubTotal { get; set; }
@@ -15,6 +15,6 @@ namespace HPHA.UiPath.Core.Entities.Common
         public PurchaseOrderVendorEntity? Vendor { get; set; }
         public PurchaseOrderItemEntity[]? Items { get; set; }
         
-        public string Number => InvoiceId ?? string.Empty;
+        public ReferenceEntity? Reference { get; set; }
     }
 }

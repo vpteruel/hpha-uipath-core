@@ -34,7 +34,7 @@ namespace HPHA.UiPath.Core.Converters
                         UnitPrice = Convert.ToDouble(!string.IsNullOrWhiteSpace(row.Field<string?>("Item Cost UP")) ? row.Field<string?>("Item Cost UP") : "0.00")
                     }).ToArray()
                 })
-                .OrderBy(p => p.Number);
+                .OrderBy(row => row.InvoiceId);
 
             // Increment PoLine only when it's 0
             purchaseOrders

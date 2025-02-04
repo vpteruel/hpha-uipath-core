@@ -33,7 +33,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             // Assert
             result.Should().HaveCount(2);
 
-            var po123 = result.First(po => po.Number == "PO123");
+            var po123 = result.First(po => po.InvoiceId == "PO123");
+            po123.InvoiceNumber.Should().Be("PO123");
             po123.Vendor?.Number.Should().Be("V001");
             po123.Vendor?.Mnemonic.Should().Be("VM001");
             po123.Vendor?.Name.Should().Be("Vendor 1");
@@ -51,7 +52,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             po123.Items[1].Quantity.Should().Be(20);
             po123.Items[1].UnitPrice.Should().Be(200.75d);
 
-            var po124 = result.First(po => po.Number == "PO124");
+            var po124 = result.First(po => po.InvoiceId == "PO124");
+            po124.InvoiceNumber.Should().Be("PO124");
             po124.Vendor?.Number.Should().Be("V002");
             po124.Vendor?.Mnemonic.Should().Be("VM002");
             po124.Vendor?.Name.Should().Be("Vendor 2");
