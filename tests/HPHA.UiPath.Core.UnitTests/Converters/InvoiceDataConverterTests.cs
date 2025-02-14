@@ -14,23 +14,24 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             // Arrange
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, detailedJsonPath);
             var fileInfo = new FileInfo(filePath);
-            
+
             var detailed = InvoiceDataConverter.ReadDetailedJsonFile(fileInfo);
             var fields = detailed?.AnalyzeResult?.Documents?[0].Fields;
 
             // Act
-            var simplified = InvoiceDataConverter.ConvertDetailedToSimplified(detailed);
+            var simplified = InvoiceDataConverter.ConvertDetailedToSimplified(detailed!);
 
             // Assert
             simplified.ShouldNotBeNull();
-            simplified.InvoiceDate?.ValueDate.ShouldBe(fields?.InvoiceDate?.ValueDate);
+            simplified.InvoiceDate?.Content.ShouldBe(fields?.InvoiceDate?.Content);
             simplified.InvoiceId?.ValueString.ShouldBe(fields?.InvoiceId?.ValueString);
             simplified.InvoiceTotal?.ValueCurrency?.Amount.ShouldBe(fields?.InvoiceTotal?.ValueCurrency?.Amount);
             simplified.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
             simplified.SubTotal?.ValueCurrency?.Amount.ShouldBe(fields?.SubTotal?.ValueCurrency?.Amount);
             simplified.TotalTax?.ValueCurrency?.Amount.ShouldBe(fields?.TotalTax?.ValueCurrency?.Amount);
             simplified.VendorName?.ValueString.ShouldBe(fields?.VendorName?.ValueString);
-            simplified.Items.Count().ShouldBe(fields?.Items?.ValueArray?.Count ?? 0);
+            simplified.Items.ShouldNotBeNull();
+            simplified.Items.Count.ShouldBe(fields?.Items?.ValueArray?.Count ?? 0);
         }
 
         [Theory]
@@ -69,10 +70,12 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             detailed.ShouldNotBeNull();
             detailed.Status.ShouldBe("succeeded");
             detailed.AnalyzeResult.ShouldNotBeNull();
-            detailed.AnalyzeResult.Documents.Count().ShouldBe(1);
+            detailed.AnalyzeResult.Documents.ShouldNotBeNull();
+            detailed.AnalyzeResult.Documents.Count.ShouldBe(1);
             detailed.AnalyzeResult.Documents[0].Fields?.InvoiceId?.ValueString.ShouldBe(invoiceId);
             detailed.AnalyzeResult.Documents[0].Fields?.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
-            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray.Count().ShouldBe(itemsCount);
+            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray.ShouldNotBeNull();
+            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray?.Count.ShouldBe(itemsCount);
         }
 
         [Theory]
@@ -95,7 +98,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             simplified.ShouldNotBeNull();
             simplified.InvoiceId?.ValueString.ShouldBe(invoiceId);
             simplified.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
-            simplified.Items.Count().ShouldBe(itemsCount);
+            simplified.Items.ShouldNotBeNull();
+            simplified.Items.Count.ShouldBe(itemsCount);
         }
     }
 }

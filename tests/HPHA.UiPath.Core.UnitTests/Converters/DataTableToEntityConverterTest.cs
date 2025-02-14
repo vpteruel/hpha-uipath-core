@@ -38,7 +38,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             po123.Vendor?.Number.ShouldBe("V001");
             po123.Vendor?.Mnemonic.ShouldBe("VM001");
             po123.Vendor?.Name.ShouldBe("Vendor 1");
-            po123.Items.Count().ShouldBe(2);
+            po123.Items.ShouldNotBeNull();
+            po123.Items.Length.ShouldBe(2);
             po123.Items[0].PoLine.ShouldBe(1);
             po123.Items[0].Number.ShouldBe("Item001");
             po123.Items[0].Name.ShouldBe("Item Name 1");
@@ -57,7 +58,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             po124.Vendor?.Number.ShouldBe("V002");
             po124.Vendor?.Mnemonic.ShouldBe("VM002");
             po124.Vendor?.Name.ShouldBe("Vendor 2");
-            po124.Items.Count().ShouldBe(1);
+            po124.Items.ShouldNotBeNull();
+            po124.Items.Length.ShouldBe(1);
             po124.Items[0].PoLine.ShouldBe(1);
             po124.Items[0].Number.ShouldBe("Item003");
             po124.Items[0].Name.ShouldBe("Item Name 3");

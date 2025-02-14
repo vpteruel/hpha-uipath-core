@@ -1,4 +1,5 @@
 using HPHA.UiPath.Core.Generators;
+using Shouldly;
 
 namespace HPHA.UiPath.Core.UnitTests.Generators
 {
@@ -7,44 +8,74 @@ namespace HPHA.UiPath.Core.UnitTests.Generators
         [Fact]
         public void GenerateShortDeterministicID_ReturnsExpectedLength_DefaultSize()
         {
+            // Arrange
             string input = "test input";
+
+            // Act
             string result = DeterministicIdGenerator.GenerateShortDeterministicID(input);
-            Assert.Equal(16, result.Length);
+
+            // Assert
+            result.Length.ShouldBe(16);
         }
 
         [Fact]
         public void GenerateShortDeterministicID_ReturnsExpectedLength_CustomSize()
         {
+            // Arrange
             string input = "test input";
             int customSize = 8;
+
+            // Act
             string result = DeterministicIdGenerator.GenerateShortDeterministicID(input, customSize);
-            Assert.Equal(customSize, result.Length);
+
+            // Assert
+            result.Length.ShouldBe(customSize);
         }
 
-        [Fact]
-        public void GenerateShortDeterministicID_ReturnsUrlSafeString()
+        [Theory]
+        [InlineData("test input")]
+        [InlineData("another test input")]
+        [InlineData("yet another test input")]
+        [InlineData("one more test input")]
+        [InlineData("final test input")]
+        public void GenerateShortDeterministicID_ReturnsUrlSafeString(string input)
         {
-            string input = "test input";
+            // Arrange
+            
+            // Act
             string result = DeterministicIdGenerator.GenerateShortDeterministicID(input);
-            Assert.DoesNotContain("/", result);
-            Assert.DoesNotContain("+", result);
+
+            // Assert
+            result.ShouldNotContain("/");
+            result.ShouldNotContain("+");
         }
 
         [Fact]
         public void GenerateShortDeterministicID_ReturnsDeterministicResult()
         {
+            // Arrange
             string input = "test input";
+
+            // Act
             string result1 = DeterministicIdGenerator.GenerateShortDeterministicID(input);
             string result2 = DeterministicIdGenerator.GenerateShortDeterministicID(input);
-            Assert.Equal(result1, result2);
+
+            // Assert
+            result1.ShouldBe(result2);
         }
 
         [Fact]
         public void GenerateShortDeterministicID_ThrowsException_ForInvalidSize()
         {
+            // Arrange
             string input = "test input";
             int invalidSize = 100; // Size larger than the base64 hash length
-            Assert.Throws<ArgumentOutOfRangeException>(() => DeterministicIdGenerator.GenerateShortDeterministicID(input, invalidSize));
+
+            // Act
+            Action act = () => DeterministicIdGenerator.GenerateShortDeterministicID(input, invalidSize);
+
+            // Assert
+            act.ShouldThrow<ArgumentOutOfRangeException>();
         }
     }
 }

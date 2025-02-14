@@ -60,8 +60,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             result.SubTotal.ShouldBe(293.45d);
             result.TotalTax.ShouldBe(2.32d);
             result.Vendor?.Name.ShouldBe("Culligan\nTM");
-
-            result.Items.Count().ShouldBe(11);
+            result.Items.ShouldNotBeNull();
+            result.Items.Length.ShouldBe(11);
 
             var item1 = result.Items[0];
             item1.Amount.ShouldBe(11.44d);
@@ -122,8 +122,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             result.SubTotal.ShouldBe(293.45d);
             result.TotalTax.ShouldBe(2.32d);
             result.Vendor?.Name.ShouldBe("Culligan\nTM");
-
-            result.Items.Count().ShouldBe(11);
+            result.Items.ShouldNotBeNull();
+            result.Items.Length.ShouldBe(11);
 
             var item1 = result.Items[0];
             item1.Amount.ShouldBe(11.44d);
