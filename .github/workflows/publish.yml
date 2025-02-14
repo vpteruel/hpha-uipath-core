@@ -19,13 +19,13 @@ jobs:
         dotnet-version: '9.0'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./src/HPHA.UiPath.Core/HPHA.UiPath.Core.csproj
 
     - name: Build the project
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore ./src/HPHA.UiPath.Core/HPHA.UiPath.Core.csproj
 
     - name: Pack the NuGet package
-      run: dotnet pack --configuration Release --no-build --output ./nupkg
+      run: dotnet pack --configuration Release --no-build --output ./nupkg ./src/HPHA.UiPath.Core/HPHA.UiPath.Core.csproj
 
     - name: Publish to NuGet
       env:
