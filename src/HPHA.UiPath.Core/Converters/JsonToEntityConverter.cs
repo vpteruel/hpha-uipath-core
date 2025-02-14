@@ -47,7 +47,7 @@ namespace HPHA.UiPath.Core.Converters
         private static PurchaseOrderEntity ConvertSimplifiedToPurchaseOrderEntity(S.InvoiceData invoiceData)
         {
             DateOnly? invoiceDate = null;
-            if (DateOnly.TryParse(invoiceData?.InvoiceDate?.ValueDate, out var parsedDate))
+            if (DateOnly.TryParse(invoiceData?.InvoiceDate?.Content, out var parsedDate))
             {
                 invoiceDate = parsedDate;
             }
