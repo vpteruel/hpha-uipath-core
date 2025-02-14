@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HPHA.UiPath.Core\HPHA.UiPath.Core.csproj" />
+    <ProjectReference Include="..\..\src\HPHA.UiPath.Core\HPHA.UiPath.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
