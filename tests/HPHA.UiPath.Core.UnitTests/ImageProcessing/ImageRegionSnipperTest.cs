@@ -1,5 +1,5 @@
-using FluentAssertions;
 using HPHA.UiPath.Core.ImageProcessing;
+using Shouldly;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
@@ -39,16 +39,16 @@ namespace HPHA.UiPath.Core.UnitTests.ImageProcessing
                 .SnipRegion(_inputFileName, _inputFilePath, _inputFolderPath, x, y, width, height);
 
             // Assert
-            filePath.Should().NotBeNullOrEmpty();
-            File.Exists(filePath).Should().BeTrue();
+            filePath.ShouldNotBeNullOrEmpty();
+            File.Exists(filePath).ShouldBeTrue();
 
             using Image<Rgba32> expectedImage = new(50, 50);
             expectedImage.Mutate(ctx => ctx.Fill(Color.Green));
 
-            capturedImage.Frames.Count.Should().Be(expectedImage.Frames.Count);
-            capturedImage.Size.Should().Be(expectedImage.Size);
-            capturedImage.Width.Should().Be(expectedImage.Width);
-            capturedImage.Height.Should().Be(expectedImage.Height);
+            capturedImage.Frames.Count.ShouldBe(expectedImage.Frames.Count);
+            capturedImage.Size.ShouldBe(expectedImage.Size);
+            capturedImage.Width.ShouldBe(expectedImage.Width);
+            capturedImage.Height.ShouldBe(expectedImage.Height);
         }
 
         public void Dispose()

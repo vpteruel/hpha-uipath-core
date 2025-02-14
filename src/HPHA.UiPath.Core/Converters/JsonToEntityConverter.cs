@@ -110,7 +110,7 @@ namespace HPHA.UiPath.Core.Converters
             var fields = invoiceData?.AnalyzeResult?.Documents?[0].Fields;
 
             DateOnly? invoiceDate = null;
-            if (DateOnly.TryParse(fields?.InvoiceDate?.ValueDate, out var parsedDate))
+            if (DateOnly.TryParse(fields?.InvoiceDate?.Content, out var parsedDate))
             {
                 invoiceDate = parsedDate;
             }

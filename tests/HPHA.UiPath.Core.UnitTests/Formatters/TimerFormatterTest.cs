@@ -1,5 +1,5 @@
 using HPHA.UiPath.Core.Formatters;
-using FluentAssertions;
+using Shouldly;
 
 namespace HPHA.UiPath.Core.UnitTests.Formatters
 {
@@ -21,7 +21,7 @@ namespace HPHA.UiPath.Core.UnitTests.Formatters
             List<string> result = TimerFormatter.GetTimeParts(timeSpan);
 
             // Assert
-            result.Should().Equal(expectedParts);
+            result.ShouldBe(expectedParts);
         }
 
         [Theory]
@@ -38,7 +38,7 @@ namespace HPHA.UiPath.Core.UnitTests.Formatters
             string result = TimerFormatter.FormatHumanReadable(elapsedMilliseconds);
 
             // Assert
-            result.Should().Be(expectedFormat);
+            result.ShouldBe(expectedFormat);
         }
 
         [Theory]
@@ -51,7 +51,7 @@ namespace HPHA.UiPath.Core.UnitTests.Formatters
             string result = TimerFormatter.GetAverageTimePerRow(elapsedMilliseconds, rowsProcessed);
 
             // Assert
-            result.Should().Be(expectedAverage);
+            result.ShouldBe(expectedAverage);
         }
 
         [Theory]
@@ -65,7 +65,7 @@ namespace HPHA.UiPath.Core.UnitTests.Formatters
             string result = TimerFormatter.GetEstimatedTimeRemaining(elapsedMilliseconds, rowsProcessed, totalRows);
 
             // Assert
-            result.Should().Be(expectedEstimate);
+            result.ShouldBe(expectedEstimate);
         }
     }
 }

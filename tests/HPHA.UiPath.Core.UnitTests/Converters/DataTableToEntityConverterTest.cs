@@ -1,7 +1,7 @@
 using System.Data;
 using HPHA.UiPath.Core.Converters;
 using HPHA.UiPath.Core.Entities.Common;
-using FluentAssertions;
+using Shouldly;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
@@ -31,39 +31,39 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             PurchaseOrderEntity[] result = DataTableToEntityConverter.ConvertToPurchaseOrderEntities(table);
 
             // Assert
-            result.Should().HaveCount(2);
+            result.Count().ShouldBe(2);
 
             var po123 = result.First(po => po.InvoiceId == "PO123");
-            po123.InvoiceNumber.Should().Be("PO123");
-            po123.Vendor?.Number.Should().Be("V001");
-            po123.Vendor?.Mnemonic.Should().Be("VM001");
-            po123.Vendor?.Name.Should().Be("Vendor 1");
-            po123.Items.Should().HaveCount(2);
-            po123.Items[0].PoLine.Should().Be(1);
-            po123.Items[0].Number.Should().Be("Item001");
-            po123.Items[0].Name.Should().Be("Item Name 1");
-            po123.Items[0].Description.Should().Be("Item Description 1");
-            po123.Items[0].Quantity.Should().Be(10);
-            po123.Items[0].UnitPrice.Should().Be(100.50d);
-            po123.Items[1].PoLine.Should().Be(2);
-            po123.Items[1].Number.Should().Be("Item002");
-            po123.Items[1].Name.Should().Be("Item Name 2");
-            po123.Items[1].Description.Should().Be("Item Description 2");
-            po123.Items[1].Quantity.Should().Be(20);
-            po123.Items[1].UnitPrice.Should().Be(200.75d);
+            po123.InvoiceNumber.ShouldBe("PO123");
+            po123.Vendor?.Number.ShouldBe("V001");
+            po123.Vendor?.Mnemonic.ShouldBe("VM001");
+            po123.Vendor?.Name.ShouldBe("Vendor 1");
+            po123.Items.Count().ShouldBe(2);
+            po123.Items[0].PoLine.ShouldBe(1);
+            po123.Items[0].Number.ShouldBe("Item001");
+            po123.Items[0].Name.ShouldBe("Item Name 1");
+            po123.Items[0].Description.ShouldBe("Item Description 1");
+            po123.Items[0].Quantity.ShouldBe(10);
+            po123.Items[0].UnitPrice.ShouldBe(100.50d);
+            po123.Items[1].PoLine.ShouldBe(2);
+            po123.Items[1].Number.ShouldBe("Item002");
+            po123.Items[1].Name.ShouldBe("Item Name 2");
+            po123.Items[1].Description.ShouldBe("Item Description 2");
+            po123.Items[1].Quantity.ShouldBe(20);
+            po123.Items[1].UnitPrice.ShouldBe(200.75d);
 
             var po124 = result.First(po => po.InvoiceId == "PO124");
-            po124.InvoiceNumber.Should().Be("PO124");
-            po124.Vendor?.Number.Should().Be("V002");
-            po124.Vendor?.Mnemonic.Should().Be("VM002");
-            po124.Vendor?.Name.Should().Be("Vendor 2");
-            po124.Items.Should().HaveCount(1);
-            po124.Items[0].PoLine.Should().Be(1);
-            po124.Items[0].Number.Should().Be("Item003");
-            po124.Items[0].Name.Should().Be("Item Name 3");
-            po124.Items[0].Description.Should().Be("Item Description 3");
-            po124.Items[0].Quantity.Should().Be(30);
-            po124.Items[0].UnitPrice.Should().Be(300.00d);
+            po124.InvoiceNumber.ShouldBe("PO124");
+            po124.Vendor?.Number.ShouldBe("V002");
+            po124.Vendor?.Mnemonic.ShouldBe("VM002");
+            po124.Vendor?.Name.ShouldBe("Vendor 2");
+            po124.Items.Count().ShouldBe(1);
+            po124.Items[0].PoLine.ShouldBe(1);
+            po124.Items[0].Number.ShouldBe("Item003");
+            po124.Items[0].Name.ShouldBe("Item Name 3");
+            po124.Items[0].Description.ShouldBe("Item Description 3");
+            po124.Items[0].Quantity.ShouldBe(30);
+            po124.Items[0].UnitPrice.ShouldBe(300.00d);
         }
     }
 }

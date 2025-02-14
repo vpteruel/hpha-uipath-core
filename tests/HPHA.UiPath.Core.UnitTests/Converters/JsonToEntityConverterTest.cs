@@ -1,6 +1,6 @@
-using FluentAssertions;
 using HPHA.UiPath.Core.Converters;
 using HPHA.UiPath.Core.Entities.Common;
+using Shouldly;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
@@ -20,7 +20,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             Action act = () => JsonToEntityConverter.ConvertSimplifiedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            act.Should().Throw<FileNotFoundException>().WithMessage("File not found.");
+            act.ShouldThrow<FileNotFoundException>("File not found.");
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             Action act = () => JsonToEntityConverter.ConvertSimplifiedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            act.Should().Throw<InvalidOperationException>().WithMessage("Deserialization failed.");
+            act.ShouldThrow<InvalidOperationException>("Deserialization failed.");
 
             // Cleanup
             File.Delete(tempFilePath);
@@ -53,22 +53,22 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             PurchaseOrderEntity result = JsonToEntityConverter.ConvertSimplifiedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            result.InvoiceDate.Should().Be(new DateOnly(2025, 1, 15));
-            result.InvoiceId.Should().Be("DEC24-HPHA");
-            result.InvoiceTotal.Should().Be(295.77d);
-            result.PurchaseOrder.Should().Be("255167");
-            result.SubTotal.Should().Be(293.45d);
-            result.TotalTax.Should().Be(2.32d);
-            result.Vendor?.Name.Should().Be("Culligan\nTM");
+            result.InvoiceDate.ShouldBe(new DateOnly(2025, 1, 15));
+            result.InvoiceId.ShouldBe("DEC24-HPHA");
+            result.InvoiceTotal.ShouldBe(295.77d);
+            result.PurchaseOrder.ShouldBe("255167");
+            result.SubTotal.ShouldBe(293.45d);
+            result.TotalTax.ShouldBe(2.32d);
+            result.Vendor?.Name.ShouldBe("Culligan\nTM");
 
-            result.Items.Should().HaveCount(11);
+            result.Items.Count().ShouldBe(11);
 
             var item1 = result.Items[0];
-            item1.Amount.Should().Be(11.44d);
-            item1.Description.Should().Be("Rental - Bottled Water Coolers");
-            item1.Quantity.Should().Be(1);
-            item1.Tax.Should().Be(1.49d);
-            item1.UnitPrice.Should().Be(9.95d);
+            item1.Amount.ShouldBe(11.44d);
+            item1.Description.ShouldBe("Rental - Bottled Water Coolers");
+            item1.Quantity.ShouldBe(1);
+            item1.Tax.ShouldBe(1.49d);
+            item1.UnitPrice.ShouldBe(9.95d);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             Action act = () => JsonToEntityConverter.ConvertDetailedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            act.Should().Throw<FileNotFoundException>().WithMessage("File not found.");
+            act.ShouldThrow<FileNotFoundException>("File not found.");
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             Action act = () => JsonToEntityConverter.ConvertDetailedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            act.Should().Throw<InvalidOperationException>().WithMessage("Deserialization failed.");
+            act.ShouldThrow<InvalidOperationException>("Deserialization failed.");
 
             // Cleanup
             File.Delete(tempFilePath);
@@ -115,22 +115,22 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             PurchaseOrderEntity result = JsonToEntityConverter.ConvertDetailedJsonToPurchaseOrderEntity(fileInfo);
 
             // Assert
-            result.InvoiceDate.Should().Be(new DateOnly(2025, 1, 15));
-            result.InvoiceId.Should().Be("DEC24-HPHA");
-            result.InvoiceTotal.Should().Be(295.77d);
-            result.PurchaseOrder.Should().Be("255167");
-            result.SubTotal.Should().Be(293.45d);
-            result.TotalTax.Should().Be(2.32d);
-            result.Vendor?.Name.Should().Be("Culligan\nTM");
+            result.InvoiceDate.ShouldBe(new DateOnly(2025, 1, 15));
+            result.InvoiceId.ShouldBe("DEC24-HPHA");
+            result.InvoiceTotal.ShouldBe(295.77d);
+            result.PurchaseOrder.ShouldBe("255167");
+            result.SubTotal.ShouldBe(293.45d);
+            result.TotalTax.ShouldBe(2.32d);
+            result.Vendor?.Name.ShouldBe("Culligan\nTM");
 
-            result.Items.Should().HaveCount(11);
+            result.Items.Count().ShouldBe(11);
 
             var item1 = result.Items[0];
-            item1.Amount.Should().Be(11.44d);
-            item1.Description.Should().Be("Rental - Bottled Water Coolers");
-            item1.Quantity.Should().Be(1);
-            item1.Tax.Should().Be(1.49d);
-            item1.UnitPrice.Should().Be(9.95d);
+            item1.Amount.ShouldBe(11.44d);
+            item1.Description.ShouldBe("Rental - Bottled Water Coolers");
+            item1.Quantity.ShouldBe(1);
+            item1.Tax.ShouldBe(1.49d);
+            item1.UnitPrice.ShouldBe(9.95d);
         }
     }
 }

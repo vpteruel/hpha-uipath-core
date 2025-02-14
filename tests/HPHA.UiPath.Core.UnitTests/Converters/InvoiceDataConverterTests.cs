@@ -1,5 +1,5 @@
-using FluentAssertions;
 using HPHA.UiPath.Core.Converters;
+using Shouldly;
 
 namespace HPHA.UiPath.Core.UnitTests.Converters
 {
@@ -22,15 +22,15 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             var simplified = InvoiceDataConverter.ConvertDetailedToSimplified(detailed);
 
             // Assert
-            simplified.Should().NotBeNull();
-            simplified.InvoiceDate?.ValueDate.Should().Be(fields?.InvoiceDate?.ValueDate);
-            simplified.InvoiceId?.ValueString.Should().Be(fields?.InvoiceId?.ValueString);
-            simplified.InvoiceTotal?.ValueCurrency?.Amount.Should().Be(fields?.InvoiceTotal?.ValueCurrency?.Amount);
-            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
-            simplified.SubTotal?.ValueCurrency?.Amount.Should().Be(fields?.SubTotal?.ValueCurrency?.Amount);
-            simplified.TotalTax?.ValueCurrency?.Amount.Should().Be(fields?.TotalTax?.ValueCurrency?.Amount);
-            simplified.VendorName?.ValueString.Should().Be(fields?.VendorName?.ValueString);
-            simplified.Items.Should().HaveCount(fields?.Items?.ValueArray?.Count ?? 0);
+            simplified.ShouldNotBeNull();
+            simplified.InvoiceDate?.ValueDate.ShouldBe(fields?.InvoiceDate?.ValueDate);
+            simplified.InvoiceId?.ValueString.ShouldBe(fields?.InvoiceId?.ValueString);
+            simplified.InvoiceTotal?.ValueCurrency?.Amount.ShouldBe(fields?.InvoiceTotal?.ValueCurrency?.Amount);
+            simplified.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
+            simplified.SubTotal?.ValueCurrency?.Amount.ShouldBe(fields?.SubTotal?.ValueCurrency?.Amount);
+            simplified.TotalTax?.ValueCurrency?.Amount.ShouldBe(fields?.TotalTax?.ValueCurrency?.Amount);
+            simplified.VendorName?.ValueString.ShouldBe(fields?.VendorName?.ValueString);
+            simplified.Items.Count().ShouldBe(fields?.Items?.ValueArray?.Count ?? 0);
         }
 
         [Theory]
@@ -45,8 +45,8 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             var simplified = InvoiceDataConverter.ReadAndConvertDetailedJsonToSimplified(fileInfo);
 
             // Assert
-            simplified.Should().NotBeNull();
-            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
+            simplified.ShouldNotBeNull();
+            simplified.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
         }
 
         [Theory]
@@ -66,13 +66,13 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             var detailed = InvoiceDataConverter.ReadDetailedJsonFile(fileInfo);
 
             // Assert
-            detailed.Should().NotBeNull();
-            detailed.Status.Should().Be("succeeded");
-            detailed.AnalyzeResult.Should().NotBeNull();
-            detailed.AnalyzeResult.Documents.Should().HaveCount(1);
-            detailed.AnalyzeResult.Documents[0].Fields?.InvoiceId?.ValueString.Should().Be(invoiceId);
-            detailed.AnalyzeResult.Documents[0].Fields?.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
-            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray.Should().HaveCount(itemsCount);
+            detailed.ShouldNotBeNull();
+            detailed.Status.ShouldBe("succeeded");
+            detailed.AnalyzeResult.ShouldNotBeNull();
+            detailed.AnalyzeResult.Documents.Count().ShouldBe(1);
+            detailed.AnalyzeResult.Documents[0].Fields?.InvoiceId?.ValueString.ShouldBe(invoiceId);
+            detailed.AnalyzeResult.Documents[0].Fields?.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
+            detailed.AnalyzeResult.Documents[0].Fields?.Items?.ValueArray.Count().ShouldBe(itemsCount);
         }
 
         [Theory]
@@ -92,10 +92,10 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             var simplified = InvoiceDataConverter.ReadAndConvertDetailedJsonToSimplified(fileInfo);
 
             // Assert
-            simplified.Should().NotBeNull();
-            simplified.InvoiceId?.ValueString.Should().Be(invoiceId);
-            simplified.PurchaseOrder?.ValueString.Should().Be(purchaseOrder);
-            simplified.Items.Should().HaveCount(itemsCount);
+            simplified.ShouldNotBeNull();
+            simplified.InvoiceId?.ValueString.ShouldBe(invoiceId);
+            simplified.PurchaseOrder?.ValueString.ShouldBe(purchaseOrder);
+            simplified.Items.Count().ShouldBe(itemsCount);
         }
     }
 }
