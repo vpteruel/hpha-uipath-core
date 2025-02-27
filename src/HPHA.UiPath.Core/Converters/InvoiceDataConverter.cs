@@ -1,12 +1,92 @@
 using System.Text;
 using System.Text.Json;
-using S = HPHA.UiPath.Core.Azure.DocumentIntelligence.Simplified;
 using D = HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed;
+using M = HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified;
+using S = HPHA.UiPath.Core.Azure.DocumentIntelligence.Simplified;
 
 namespace HPHA.UiPath.Core.Converters
 {
     public static class InvoiceDataConverter
     {
+        /// <summary>
+        /// Converts a detailed invoice data to a minified invoice data.
+        /// </summary>
+        /// <param name="detailed"></param>
+        /// <returns></returns>
+        public static M.InvoiceData ConvertDetailedToMinified(D.InvoiceData detailed)
+        {
+            var fields = detailed?.AnalyzeResult?.Documents?[0].Fields;
+            var items = fields?.Items?.ValueArray?
+                .Select(item => item.ValueObject)
+                .Where(item => item != null)
+                .Cast<D.ValueObject>()
+                .ToList();
+
+            return new M.InvoiceData
+            {
+                InvoiceDate = new M.StringValue
+                {
+                    Content = fields?.InvoiceDate?.Content,
+                    Confidence = fields?.InvoiceDate?.Confidence,
+                },
+                InvoiceId = new M.StringValue
+                {
+                    Content = fields?.InvoiceId?.Content,
+                    Confidence = fields?.InvoiceId?.Confidence,
+                },
+                InvoiceTotal = new M.DoubleValue
+                {
+                    Content = fields?.InvoiceTotal?.ValueCurrency?.Amount,
+                    Confidence = fields?.InvoiceTotal?.Confidence,
+                },
+                PurchaseOrder = GetPurchaseOrderMinified(fields),
+                SubTotal = new M.DoubleValue
+                {
+                    Content = fields?.SubTotal?.ValueCurrency?.Amount,
+                    Confidence = fields?.SubTotal?.Confidence
+                },
+                TotalTax = new M.DoubleValue
+                {
+                    Content = fields?.TotalTax?.ValueCurrency?.Amount,
+                    Confidence = fields?.TotalTax?.Confidence
+                },
+                VendorName = new M.StringValue
+                {
+                    Content = fields?.VendorName?.Content,
+                    Confidence = fields?.VendorName?.Confidence
+                },
+                Items = items?.Select(item => new M.Item()
+                {
+                    Quantity = new M.IntValue
+                    {
+                        Content = item.Quantity?.ValueNumber,
+                        Confidence = item.Quantity?.Confidence
+                    },
+                    Unit = null,
+                    UnitPrice = new M.DoubleValue
+                    {
+                        Content = item.UnitPrice?.ValueCurrency?.Amount,
+                        Confidence = item.UnitPrice?.Confidence
+                    },
+                    Date = new M.StringValue
+                    {
+                        Content = item.Date?.Content,
+                        Confidence = item.Date?.Confidence
+                    },
+                    Tax = new M.DoubleValue
+                    {
+                        Content = item.Tax?.ValueCurrency?.Amount,
+                        Confidence = item.Tax?.Confidence
+                    },
+                    Amount = new M.DoubleValue
+                    {
+                        Content = item.Amount?.ValueCurrency?.Amount,
+                        Confidence = item.Amount?.Confidence
+                    },
+                }).ToList()
+            };
+        }
+
         /// <summary>
         /// Converts a detailed invoice data to a simplified invoice data.
         /// </summary>
@@ -49,7 +129,7 @@ namespace HPHA.UiPath.Core.Converters
                         CurrencySymbol = fields?.InvoiceTotal?.ValueCurrency?.CurrencySymbol
                     }
                 },
-                PurchaseOrder = GetPurchaseOrder(fields),
+                PurchaseOrder = GetPurchaseOrderSimplified(fields),
                 SubTotal = new()
                 {
                     Confidence = fields?.SubTotal?.Confidence,
@@ -158,7 +238,36 @@ namespace HPHA.UiPath.Core.Converters
             };
         }
 
-        private static S.PurchaseOrder GetPurchaseOrder(D.Fields? fields)
+        private static M.StringValue GetPurchaseOrderMinified(D.Fields? fields)
+        {
+            var purchaseOrder = new M.StringValue
+            {
+                Content = fields?.PurchaseOrder?.Content,
+                Confidence = fields?.PurchaseOrder?.Confidence ?? 0
+            };
+
+            if (fields?.CustomerReference?.Confidence > purchaseOrder.Confidence)
+            {
+                purchaseOrder = new()
+                {
+                    Confidence = fields?.CustomerReference?.Confidence,
+                    Content = fields?.CustomerReference?.Content
+                };
+            }
+
+            if (fields?.YourOrderNumber?.Confidence > purchaseOrder.Confidence)
+            {
+                purchaseOrder = new()
+                {
+                    Confidence = fields?.YourOrderNumber?.Confidence,
+                    Content = fields?.YourOrderNumber?.Content
+                };
+            }
+
+            return purchaseOrder;
+        }
+
+        private static S.PurchaseOrder GetPurchaseOrderSimplified(D.Fields? fields)
         {
             var purchaseOrder = new S.PurchaseOrder
             {
@@ -222,6 +331,17 @@ namespace HPHA.UiPath.Core.Converters
             {
                 throw new InvalidOperationException("Deserialization failed.", ex);
             }
+        }
+
+        /// <summary>
+        /// Reads a detailed JSON file and converts it to a minified invoice data.
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
+        public static M.InvoiceData ReadAndConvertDetailedJsonToMinified(FileInfo fileInfo)
+        {
+            var detailed = ReadDetailedJsonFile(fileInfo);
+            return ConvertDetailedToMinified(detailed);
         }
 
         /// <summary>
