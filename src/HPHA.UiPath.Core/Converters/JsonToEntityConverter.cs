@@ -120,15 +120,15 @@ namespace HPHA.UiPath.Core.Converters
             {
                 Amount = item.Amount?.Content,
                 Description = item.Description?.Content,
-                Quantity = item.Quantity?.Content,
+                Quantity = Convert.ToInt32(item.Quantity?.Content ?? 0.0d),
                 Tax = item.Tax?.Content,
                 UnitPrice = item.UnitPrice?.Content
             }).ToArray();
 
             return new PurchaseOrderEntity
             {
-                InvoiceDate = invoiceDate,
                 InvoiceId = invoiceData?.InvoiceId?.Content,
+                InvoiceDate = invoiceDate,
                 InvoiceTotal = invoiceData?.InvoiceTotal?.Content,
                 PurchaseOrder = invoiceData?.PurchaseOrder?.Content,
                 SubTotal = invoiceData?.SubTotal?.Content,
