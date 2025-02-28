@@ -13,8 +13,8 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified
         [JsonPropertyName("UnitPrice")]
         public DoubleValue? UnitPrice { get; set; }
 
-        [JsonPropertyName("Date")]
-        public StringValue? Date { get; set; }
+        [JsonPropertyName("Description")]
+        public StringValue? Description { get; set; }
 
         [JsonPropertyName("Tax")]
         public DoubleValue? Tax { get; set; }
