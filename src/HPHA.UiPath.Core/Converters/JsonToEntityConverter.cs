@@ -121,7 +121,7 @@ namespace HPHA.UiPath.Core.Converters
                 Amount = item.Amount?.Content,
                 Description = item.Description?.Content,
                 Quantity = item.Quantity?.Content,
-                Tax = item.Tax?.ValueCurrency?.Content,
+                Tax = item.Tax?.Content,
                 UnitPrice = item.UnitPrice?.Content
             }).ToArray();
 

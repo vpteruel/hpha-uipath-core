@@ -68,10 +68,10 @@ namespace HPHA.UiPath.Core.Converters
                         Content = item.UnitPrice?.ValueCurrency?.Amount,
                         Confidence = item.UnitPrice?.Confidence
                     },
-                    Date = new M.StringValue
+                    Description = new M.StringValue
                     {
-                        Content = item.Date?.Content,
-                        Confidence = item.Date?.Confidence
+                        Content = item.Description?.Content,
+                        Confidence = item.Description?.Confidence
                     },
                     Tax = new M.DoubleValue
                     {
