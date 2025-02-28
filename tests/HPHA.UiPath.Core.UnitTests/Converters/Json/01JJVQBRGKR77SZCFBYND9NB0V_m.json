@@ -1,0 +1,101 @@
+{
+  "InvoiceId": {
+    "content": "PS-INV379258",
+    "confidence": 0.948
+  },
+  "InvoiceDate": {
+    "content": "1/15/2025",
+    "confidence": 0.948
+  },
+  "PurchaseOrder": {
+    "content": "255558",
+    "confidence": 0.939
+  },
+  "CustomerReference": {
+    "content": "STRF84",
+    "confidence": 0.652
+  },
+  "YourOrderNumber": {
+    "content": "STRF84\n255558",
+    "confidence": 0.508
+  },
+  "VendorName": {
+    "content": "chs\u00ae\n\u00ae",
+    "confidence": 0.443
+  },
+  "Items": [
+    {
+      "Description": {
+        "content": "ADULT MASK, O2 ELONGATED M\nCONC. W 7' KINK RESISTANT TUBING,\n50/CS\nLOT/SN: 2408012344 (2)",
+        "confidence": 0.932
+      },
+      "Quantity": {
+        "content": 2.0,
+        "confidence": 0.932
+      },
+      "UnitPrice": {
+        "content": 40.76,
+        "confidence": 0.928
+      },
+      "Tax": null,
+      "Amount": {
+        "content": 81.52,
+        "confidence": 0.937
+      }
+    },
+    {
+      "Description": {
+        "content": "COMBINED EPI TRAY MRX COMBINED\nEPIDURAL ANESTHESIA KIT\nLOT/SN: 200727 (4)",
+        "confidence": 0.927
+      },
+      "Quantity": {
+        "content": 4.0,
+        "confidence": 0.927
+      },
+      "UnitPrice": {
+        "content": 443.21,
+        "confidence": 0.927
+      },
+      "Tax": {
+        "content": 230.47,
+        "confidence": 0.365
+      },
+      "Amount": {
+        "content": 1772.84,
+        "confidence": 0.938
+      }
+    },
+    {
+      "Description": {
+        "content": "Shipping & Handling",
+        "confidence": 0.788
+      },
+      "Quantity": {
+        "content": 1.0,
+        "confidence": 0.852
+      },
+      "UnitPrice": {
+        "content": 41.66,
+        "confidence": 0.895
+      },
+      "Tax": null,
+      "Amount": {
+        "content": 41.66,
+        "confidence": 0.922
+      }
+    }
+  ],
+  "SubTotal": {
+    "content": 1896.02,
+    "confidence": 0.943
+  },
+  "TotalTax": {
+    "content": 235.89,
+    "confidence": 0.928
+  },
+  "InvoiceTotal": {
+    "content": 2131.91,
+    "confidence": 0.943
+  },
+  "AmountDue": null
+}
