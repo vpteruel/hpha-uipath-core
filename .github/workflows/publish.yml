@@ -24,6 +24,9 @@ jobs:
     - name: Build the project
       run: dotnet build --configuration Release --no-restore ./src/HPHA.UiPath.Core/HPHA.UiPath.Core.csproj
 
+    - name: Run tests
+      run: dotnet test --no-build --configuration Release ./tests/HPHA.UiPath.Core.UnitTests/HPHA.UiPath.Core.UnitTests.csproj
+
     - name: Pack the NuGet package
       run: dotnet pack --configuration Release --no-build --output ./nupkg ./src/HPHA.UiPath.Core/HPHA.UiPath.Core.csproj
 
