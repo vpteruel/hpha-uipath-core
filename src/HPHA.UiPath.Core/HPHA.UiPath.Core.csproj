@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <PackageId>HPHA.UiPath.Core</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Vinicius Teruel</Authors>
     <Company>HPHA</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
