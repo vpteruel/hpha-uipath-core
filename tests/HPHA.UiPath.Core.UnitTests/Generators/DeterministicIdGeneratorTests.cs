@@ -41,7 +41,7 @@ namespace HPHA.UiPath.Core.UnitTests.Generators
         public void GenerateShortDeterministicID_ReturnsUrlSafeString(string input)
         {
             // Arrange
-            
+
             // Act
             string result = DeterministicIdGenerator.GenerateShortDeterministicID(input);
 

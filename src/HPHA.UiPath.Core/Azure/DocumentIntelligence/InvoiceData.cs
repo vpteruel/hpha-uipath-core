@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified
+namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
 {
     public class InvoiceData
     {
@@ -13,9 +13,15 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified
         [JsonPropertyName("PurchaseOrder")]
         public StringValue? PurchaseOrder { get; set; }
 
+        [JsonPropertyName("CustomerReference")]
+        public StringValue? CustomerReference { get; set; }
+
+        [JsonPropertyName("YourOrderNumber")]
+        public StringValue? YourOrderNumber { get; set; }
+
         [JsonPropertyName("VendorName")]
         public StringValue? VendorName { get; set; }
-        
+
         [JsonPropertyName("SubTotal")]
         public DoubleValue? SubTotal { get; set; }
 
@@ -24,7 +30,10 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified
 
         [JsonPropertyName("InvoiceTotal")]
         public DoubleValue? InvoiceTotal { get; set; }
-        
+
+        [JsonPropertyName("AmountDue")]
+        public DoubleValue? AmountDue { get; set; }
+
         [JsonPropertyName("Items")]
         public List<Item>? Items { get; set; }
     }

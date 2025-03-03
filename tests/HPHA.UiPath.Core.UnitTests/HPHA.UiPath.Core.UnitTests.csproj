@@ -24,35 +24,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json" />
-    <None Remove="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_s.json" />
-    <None Remove="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_d.json" />
-    <None Remove="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_m.json" />
-    <None Remove="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_s.json" />
-    <None Remove="Converters\Json\sj9SScj5Clox6_m7_d.json" />
-    <None Remove="Converters\Json\sj9SScj5Clox6_m7_s.json" />
+    <None Remove="Converters\Json\test1_c.json" />
+    <None Remove="Converters\Json\test1_d.json" />
+    <None Remove="Converters\Json\test2_c.json" />
+    <None Remove="Converters\Json\test2_d.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_d.json">
+    <Content Include="Converters\Json\test1_c.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Converters\Json\AAMkAGQ2MDlhMTdhLTMzNGItNDk1Ny1h_s.json">
+    <Content Include="Converters\Json\test1_d.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_d.json">
+    <Content Include="Converters\Json\test2_c.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_m.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Converters\Json\01JJVQBRGKR77SZCFBYND9NB0V_s.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Converters\Json\sj9SScj5Clox6_m7_d.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Converters\Json\sj9SScj5Clox6_m7_s.json">
+    <Content Include="Converters\Json\test2_d.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

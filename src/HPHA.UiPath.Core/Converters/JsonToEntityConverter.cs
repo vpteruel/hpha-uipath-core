@@ -1,27 +1,23 @@
+using HPHA.UiPath.Core.Azure.DocumentIntelligence;
+using HPHA.UiPath.Core.Entities.Common;
 using System.Text;
 using System.Text.Json;
-using HPHA.UiPath.Core.Entities.Common;
-using D = HPHA.UiPath.Core.Azure.DocumentIntelligence.Detailed;
-using M = HPHA.UiPath.Core.Azure.DocumentIntelligence.Minified;
-using S = HPHA.UiPath.Core.Azure.DocumentIntelligence.Simplified;
 
 namespace HPHA.UiPath.Core.Converters
 {
     public static class JsonToEntityConverter
     {
-        private static JsonSerializerOptions _options = new()
-        {
-            PropertyNameCaseInsensitive = true
-        };
+        private const int PURCHASE_ORDER_LENGTH = 6;
+        private const double CONFIDENCE_RATE = 0.500d;
 
         /// <summary>
-        /// Converts a detailed JSON file to a PurchaseOrderEntity.
+        /// Converts a compacted JSON file to a PurchaseOrderEntity.
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        public static PurchaseOrderEntity ConvertDetailedJsonToPurchaseOrderEntity(FileInfo fileInfo)
+        public static PurchaseOrderEntity? ConvertJsonToEntity(FileInfo fileInfo)
         {
             if (fileInfo == null || !fileInfo.Exists)
                 throw new FileNotFoundException("File not found.", fileInfo?.FullName);
@@ -32,75 +28,17 @@ namespace HPHA.UiPath.Core.Converters
                 jsonContent = reader.ReadToEnd();
             }
 
-            try
+            var options = new JsonSerializerOptions()
             {
-                var invoiceData = JsonSerializer.Deserialize<D.InvoiceData>(jsonContent, _options)
-                    ?? throw new InvalidOperationException("Deserialization failed.");
-
-                return ConvertDetailedToPurchaseOrderEntity(invoiceData);
-            }
-            catch (JsonException ex)
-            {
-                throw new InvalidOperationException("Deserialization failed.", ex);
-            }
-        }
-
-        private static PurchaseOrderEntity ConvertDetailedToPurchaseOrderEntity(D.InvoiceData invoiceData)
-        {
-            var fields = invoiceData?.AnalyzeResult?.Documents?[0].Fields;
-
-            DateOnly? invoiceDate = null;
-            if (DateOnly.TryParse(fields?.InvoiceDate?.Content, out var parsedDate))
-            {
-                invoiceDate = parsedDate;
-            }
-
-            var items = fields?.Items?.ValueArray?.Select(item => new PurchaseOrderItemEntity
-            {
-                Amount = item.ValueObject?.Amount?.ValueCurrency?.Amount,
-                Description = item.ValueObject?.Description?.ValueString,
-                Quantity = item.ValueObject?.Quantity?.ValueNumber,
-                Tax = item.ValueObject?.Tax?.ValueCurrency?.Amount,
-                UnitPrice = item.ValueObject?.UnitPrice?.ValueCurrency?.Amount
-            }).ToArray();
-
-            return new PurchaseOrderEntity
-            {
-                InvoiceDate = invoiceDate,
-                InvoiceId = fields?.InvoiceId?.ValueString,
-                InvoiceTotal = fields?.InvoiceTotal?.ValueCurrency?.Amount,
-                PurchaseOrder = fields?.PurchaseOrder?.ValueString,
-                SubTotal = fields?.SubTotal?.ValueCurrency?.Amount,
-                TotalTax = fields?.TotalTax?.ValueCurrency?.Amount,
-                Vendor = new() { Name = fields?.VendorName?.ValueString },
-                Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
+                PropertyNameCaseInsensitive = true
             };
-        }
-
-        /// <summary>
-        /// Converts a minified JSON file to a PurchaseOrderEntity.
-        /// </summary>
-        /// <param name="fileInfo"></param>
-        /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        /// <exception cref="InvalidOperationException"></exception>
-        public static PurchaseOrderEntity ConvertMinifiedJsonToPurchaseOrderEntity(FileInfo fileInfo)
-        {
-            if (fileInfo == null || !fileInfo.Exists)
-                throw new FileNotFoundException("File not found.", fileInfo?.FullName);
-
-            string jsonContent;
-            using (StreamReader reader = new(fileInfo.FullName, Encoding.UTF8))
-            {
-                jsonContent = reader.ReadToEnd();
-            }
 
             try
             {
-                var invoiceData = JsonSerializer.Deserialize<M.InvoiceData>(jsonContent, _options)
+                var invoiceData = JsonSerializer.Deserialize<InvoiceData>(jsonContent, options)
                     ?? throw new InvalidOperationException("Deserialization failed.");
 
-                return ConvertMinifiedToPurchaseOrderEntity(invoiceData);
+                return ConvertJsonToEntity(invoiceData);
             }
             catch (JsonException ex)
             {
@@ -108,8 +46,11 @@ namespace HPHA.UiPath.Core.Converters
             }
         }
 
-        private static PurchaseOrderEntity ConvertMinifiedToPurchaseOrderEntity(M.InvoiceData invoiceData)
+        private static PurchaseOrderEntity? ConvertJsonToEntity(InvoiceData invoiceData)
         {
+            if (invoiceData == null)
+                throw new ArgumentNullException(nameof(invoiceData));
+
             DateOnly? invoiceDate = null;
             if (DateOnly.TryParse(invoiceData?.InvoiceDate?.Content, out var parsedDate))
             {
@@ -118,85 +59,72 @@ namespace HPHA.UiPath.Core.Converters
 
             var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
             {
-                Amount = item.Amount?.Content,
                 Description = item.Description?.Content,
-                Quantity = Convert.ToInt32(item.Quantity?.Content ?? 0.0d),
+                Quantity = item.Quantity?.Content,
+                UnitPrice = item.UnitPrice?.Content,
                 Tax = item.Tax?.Content,
-                UnitPrice = item.UnitPrice?.Content
+                Amount = item.Amount?.Content
             }).ToArray();
 
-            return new PurchaseOrderEntity
+            var entity = new PurchaseOrderEntity
             {
                 InvoiceId = invoiceData?.InvoiceId?.Content,
                 InvoiceDate = invoiceDate,
                 InvoiceTotal = invoiceData?.InvoiceTotal?.Content,
                 PurchaseOrder = invoiceData?.PurchaseOrder?.Content,
+                Vendor = new() { Name = invoiceData?.VendorName?.Content },
                 SubTotal = invoiceData?.SubTotal?.Content,
                 TotalTax = invoiceData?.TotalTax?.Content,
-                Vendor = new() { Name = invoiceData?.VendorName?.Content },
                 Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
             };
+
+            SetPurchaseOrder(entity, invoiceData!);
+            SetTotals(entity, invoiceData!);
+
+            return entity;
         }
 
-        /// <summary>
-        /// Converts a simplified JSON file to a PurchaseOrderEntity.
-        /// </summary>
-        /// <param name="fileInfo"></param>
-        /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        /// <exception cref="InvalidOperationException"></exception>
-        public static PurchaseOrderEntity ConvertSimplifiedJsonToPurchaseOrderEntity(FileInfo fileInfo)
+        private static void SetPurchaseOrder(PurchaseOrderEntity entity, InvoiceData invoiceData)
         {
-            if (fileInfo == null || !fileInfo.Exists)
-                throw new FileNotFoundException("File not found.", fileInfo?.FullName);
+            var purchaseOrder = invoiceData!.PurchaseOrder;
 
-            string jsonContent;
-            using (StreamReader reader = new(fileInfo.FullName, Encoding.UTF8))
+            if ((purchaseOrder == null 
+                || invoiceData!.CustomerReference?.Confidence > purchaseOrder?.Confidence)
+                && invoiceData!.CustomerReference?.Content?.Length == PURCHASE_ORDER_LENGTH)
             {
-                jsonContent = reader.ReadToEnd();
+                purchaseOrder = invoiceData!.CustomerReference;
             }
 
-            try
+            if ((purchaseOrder == null
+                || invoiceData!.YourOrderNumber?.Confidence > purchaseOrder?.Confidence)
+                && invoiceData!.YourOrderNumber?.Content?.Length == PURCHASE_ORDER_LENGTH)
             {
-                var invoiceData = JsonSerializer.Deserialize<S.InvoiceData>(jsonContent, _options)
-                    ?? throw new InvalidOperationException("Deserialization failed.");
+                purchaseOrder = invoiceData!.YourOrderNumber;
+            }
 
-                return ConvertSimplifiedToPurchaseOrderEntity(invoiceData);
-            }
-            catch (JsonException ex)
-            {
-                throw new InvalidOperationException("Deserialization failed.", ex);
-            }
+            entity.PurchaseOrder = purchaseOrder?.Content;
         }
 
-        private static PurchaseOrderEntity ConvertSimplifiedToPurchaseOrderEntity(S.InvoiceData invoiceData)
+        private static void SetTotals(PurchaseOrderEntity entity, InvoiceData invoiceData)
         {
-            DateOnly? invoiceDate = null;
-            if (DateOnly.TryParse(invoiceData?.InvoiceDate?.Content, out var parsedDate))
+            var subTotal = invoiceData!.SubTotal ?? null;
+            var totalTax = invoiceData!.TotalTax ?? null;
+            var invoiceTotal = invoiceData!.InvoiceTotal ?? null;
+            var amountDue = invoiceData!.AmountDue ?? null;
+
+            if (subTotal is null && totalTax != null && invoiceTotal != null && amountDue != null
+                && amountDue?.Content > invoiceTotal?.Content
+                && (totalTax?.Content + invoiceTotal?.Content) == amountDue?.Content)
             {
-                invoiceDate = parsedDate;
+                subTotal = invoiceTotal;
+                subTotal!.Confidence = CONFIDENCE_RATE;
+                invoiceTotal = amountDue;
+                invoiceTotal!.Confidence = CONFIDENCE_RATE;
             }
 
-            var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
-            {
-                Amount = item.Amount?.ValueCurrency?.Amount,
-                Description = item.Description?.ValueString,
-                Quantity = item.Quantity?.ValueNumber,
-                Tax = item.Tax?.ValueCurrency?.Amount,
-                UnitPrice = item.UnitPrice?.ValueCurrency?.Amount
-            }).ToArray();
-
-            return new PurchaseOrderEntity
-            {
-                InvoiceDate = invoiceDate,
-                InvoiceId = invoiceData?.InvoiceId?.ValueString,
-                InvoiceTotal = invoiceData?.InvoiceTotal?.ValueCurrency?.Amount,
-                PurchaseOrder = invoiceData?.PurchaseOrder?.ValueString,
-                SubTotal = invoiceData?.SubTotal?.ValueCurrency?.Amount,
-                TotalTax = invoiceData?.TotalTax?.ValueCurrency?.Amount,
-                Vendor = new() { Name = invoiceData?.VendorName?.ValueString },
-                Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
-            };
+            entity.SubTotal = subTotal?.Content;
+            entity.TotalTax = totalTax?.Content;
+            entity.InvoiceTotal = invoiceTotal?.Content;
         }
     }
 }

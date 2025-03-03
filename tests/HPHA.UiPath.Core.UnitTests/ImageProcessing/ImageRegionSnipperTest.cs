@@ -17,7 +17,7 @@ namespace HPHA.UiPath.Core.UnitTests.ImageProcessing
         {
             _inputFileName = Guid.NewGuid().ToString();
             _inputFolderPath = Guid.NewGuid().ToString();
-            
+
             Directory.CreateDirectory(_inputFolderPath);
 
             _inputFilePath = Path.Combine(_inputFolderPath, $"{_inputFileName}.png");
