@@ -35,7 +35,7 @@ using HPHA.UiPath.Core.Converters;
 
 // Example usage
 var converter = new JsonToEntityConverter();
-var entity = converter.Convert(jsonString);
+var entity = converter.ConvertJsonToEntity(jsonString);
 ```
 
 ### Formatters
