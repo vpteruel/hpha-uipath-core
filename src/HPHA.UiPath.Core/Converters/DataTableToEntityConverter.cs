@@ -17,7 +17,7 @@ namespace HPHA.UiPath.Core.Converters
                 .GroupBy(row => row.Field<string>("PO #"))
                 .Select(poGroup => new PurchaseOrderEntity
                 {
-                    InvoiceId = poGroup.Key,
+                    PurchaseOrder = poGroup.Key,
                     Vendor = new PurchaseOrderVendorEntity
                     {
                         Number = poGroup.First().Field<string>("Vendor #"),
@@ -34,7 +34,7 @@ namespace HPHA.UiPath.Core.Converters
                         UnitPrice = Convert.ToDouble(!string.IsNullOrWhiteSpace(row.Field<string?>("Item Cost UP")) ? row.Field<string?>("Item Cost UP") : "0.00")
                     }).ToArray()
                 })
-                .OrderBy(row => row.InvoiceId);
+                .OrderBy(row => row.PurchaseOrder);
 
             // Increment PoLine only when it's 0
             purchaseOrders
