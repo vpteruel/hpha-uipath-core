@@ -1,0 +1,69 @@
+{
+  "InvoiceId": {
+    "type": "string",
+    "content": "36794479",
+    "confidence": 0.981
+  },
+  "InvoiceDate": {
+    "type": "date",
+    "content": "01/17/25",
+    "confidence": 0.981
+  },
+  "DueDate": null,
+  "PurchaseOrder": {
+    "type": "string",
+    "content": "256049",
+    "confidence": 0.978
+  },
+  "VendorName": {
+    "type": "string",
+    "content": "BAXTER CORPORATION",
+    "confidence": 0.973
+  },
+  "Freight": null,
+  "SubTotal": {
+    "type": "number",
+    "content": 175.52,
+    "confidence": 0.979
+  },
+  "TotalTax": {
+    "type": "number",
+    "content": 22.82,
+    "confidence": 0.979
+  },
+  "InvoiceTotal": {
+    "type": "number",
+    "content": 198.34,
+    "confidence": 0.92
+  },
+  "AmountDue": null,
+  "Items": [
+    {
+      "Description": {
+        "type": "string",
+        "content": "WATER, STER F/INJ 1000ML FOR PHARMACY USE ONLY 12EA/CA",
+        "confidence": 0.966
+      },
+      "Quantity": {
+        "type": "integer",
+        "content": 4,
+        "confidence": 0.977
+      },
+      "UnitPrice": {
+        "type": "number",
+        "content": 43.88,
+        "confidence": 0.981
+      },
+      "Tax": {
+        "type": "number",
+        "content": 22.82,
+        "confidence": 0.985
+      },
+      "Amount": {
+        "type": "number",
+        "content": 175.52,
+        "confidence": 0.985
+      }
+    }
+  ]
+}

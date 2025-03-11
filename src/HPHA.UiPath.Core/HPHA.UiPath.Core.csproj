@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <PackageId>HPHA.UiPath.Core</PackageId>
-    <Version>2.0.4</Version>
+    <Version>2.1.0</Version>
     <Authors>Vinicius Teruel</Authors>
     <Company>HPHA</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />
   </ItemGroup>
 

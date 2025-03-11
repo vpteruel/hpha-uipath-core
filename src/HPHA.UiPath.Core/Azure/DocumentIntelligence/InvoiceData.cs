@@ -10,17 +10,17 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         [JsonPropertyName("InvoiceDate")]
         public StringValue? InvoiceDate { get; set; }
 
+        [JsonPropertyName("DueDate")]
+        public StringValue? DueDate { get; set; }
+
         [JsonPropertyName("PurchaseOrder")]
         public StringValue? PurchaseOrder { get; set; }
 
-        [JsonPropertyName("CustomerReference")]
-        public StringValue? CustomerReference { get; set; }
-
-        [JsonPropertyName("YourOrderNumber")]
-        public StringValue? YourOrderNumber { get; set; }
-
         [JsonPropertyName("VendorName")]
         public StringValue? VendorName { get; set; }
+
+        [JsonPropertyName("Freight")]
+        public DoubleValue? Freight { get; set; }
 
         [JsonPropertyName("SubTotal")]
         public DoubleValue? SubTotal { get; set; }

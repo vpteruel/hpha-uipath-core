@@ -7,7 +7,6 @@ namespace HPHA.UiPath.Core.Converters
 {
     public static class JsonToEntityConverter
     {
-        private const int PURCHASE_ORDER_LENGTH = 6;
         private const double CONFIDENCE_RATE = 0.500d;
 
         /// <summary>
@@ -57,6 +56,12 @@ namespace HPHA.UiPath.Core.Converters
                 invoiceDate = parsedDate;
             }
 
+            DateOnly? dueDate = null;
+            if (DateOnly.TryParse(invoiceData?.DueDate?.Content, out var parsedDueDate))
+            {
+                dueDate = parsedDueDate;
+            }
+
             var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
             {
                 Description = item.Description?.Content,
@@ -70,39 +75,19 @@ namespace HPHA.UiPath.Core.Converters
             {
                 InvoiceId = invoiceData?.InvoiceId?.Content,
                 InvoiceDate = invoiceDate,
-                InvoiceTotal = invoiceData?.InvoiceTotal?.Content,
+                DueDate = dueDate,
                 PurchaseOrder = invoiceData?.PurchaseOrder?.Content,
                 Vendor = new() { Name = invoiceData?.VendorName?.Content },
+                Freight = invoiceData?.Freight?.Content,
                 SubTotal = invoiceData?.SubTotal?.Content,
                 TotalTax = invoiceData?.TotalTax?.Content,
+                InvoiceTotal = invoiceData?.InvoiceTotal?.Content,
                 Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
             };
 
-            SetPurchaseOrder(entity, invoiceData!);
             SetTotals(entity, invoiceData!);
 
             return entity;
-        }
-
-        private static void SetPurchaseOrder(PurchaseOrderEntity entity, InvoiceData invoiceData)
-        {
-            var purchaseOrder = invoiceData!.PurchaseOrder;
-
-            if ((purchaseOrder == null 
-                || invoiceData!.CustomerReference?.Confidence > purchaseOrder?.Confidence)
-                && invoiceData!.CustomerReference?.Content?.Length == PURCHASE_ORDER_LENGTH)
-            {
-                purchaseOrder = invoiceData!.CustomerReference;
-            }
-
-            if ((purchaseOrder == null
-                || invoiceData!.YourOrderNumber?.Confidence > purchaseOrder?.Confidence)
-                && invoiceData!.YourOrderNumber?.Content?.Length == PURCHASE_ORDER_LENGTH)
-            {
-                purchaseOrder = invoiceData!.YourOrderNumber;
-            }
-
-            entity.PurchaseOrder = purchaseOrder?.Content;
         }
 
         private static void SetTotals(PurchaseOrderEntity entity, InvoiceData invoiceData)

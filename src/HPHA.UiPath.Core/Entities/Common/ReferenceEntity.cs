@@ -6,7 +6,7 @@ namespace HPHA.UiPath.Core.Entities.Common
     public class ReferenceEntity
     {
         public FileInfo? Pdf { get; set; }
-        public FileInfo? JsonDetailed { get; set; }
-        public FileInfo? JsonSimplified { get; set; }
+        public FileInfo? DetailedJson { get; set; }
+        public FileInfo? CompactedJson { get; set; }
     }
 }

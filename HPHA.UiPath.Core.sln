@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPHA.UiPath.Core", "src\HPH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPHA.UiPath.Core.UnitTests", "tests\HPHA.UiPath.Core.UnitTests\HPHA.UiPath.Core.UnitTests.csproj", "{20923E34-E357-4FBE-84E4-F8C1496CABCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPHA.UiPath.Components", "src\HPHA.UiPath.Components\HPHA.UiPath.Components.csproj", "{850F3E14-0A6B-4CDB-840C-F3467A48CF19}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20923E34-E357-4FBE-84E4-F8C1496CABCF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{850F3E14-0A6B-4CDB-840C-F3467A48CF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{850F3E14-0A6B-4CDB-840C-F3467A48CF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{850F3E14-0A6B-4CDB-840C-F3467A48CF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{850F3E14-0A6B-4CDB-840C-F3467A48CF19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
