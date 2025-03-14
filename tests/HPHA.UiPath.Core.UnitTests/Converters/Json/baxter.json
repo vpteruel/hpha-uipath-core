@@ -1,0 +1,28 @@
+{
+  "ModelId": "prebuilt-invoice",
+  "UniqueId": "01JPAP64MG66799B4R3F2WF910",
+  "InvoiceId": "36794479",
+  "InvoiceDate": "2025-01-17",
+  "DueDate": null,
+  "PurchaseOrder": "256049",
+  "VendorName": "Baxter",
+  "Freight": null,
+  "HazardousFee": null,
+  "FuelSurcharge": null,
+  "TransportationCharge": null,
+  "MinimumOrder": null,
+  "SubTotal": 175.52,
+  "TotalTax": 22.82,
+  "InvoiceTotal": 198.34,
+  "AmountDue": 198.34,
+  "Items": [
+    {
+      "Description": "WATER, STER F/INJ 1000ML\nFOR PHARMACY USE ONLY 12EA/CA\n22.82",
+      "Quantity": null,
+      "Unit": "CA",
+      "UnitPrice": 43.88,
+      "Tax": null,
+      "Amount": 175.52
+    }
+  ]
+}

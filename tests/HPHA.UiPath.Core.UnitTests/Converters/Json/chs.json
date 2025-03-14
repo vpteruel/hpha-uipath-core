@@ -1,0 +1,28 @@
+{
+  "ModelId": "chs-invoice",
+  "UniqueId": "01JPAM1NWEV3KFCCFEGX7SA9C0",
+  "InvoiceId": "PS-INV394638",
+  "InvoiceDate": "2025-03-04",
+  "DueDate": null,
+  "PurchaseOrder": "257773",
+  "VendorName": "Canadian Hospital Specialties Limited",
+  "Freight": 31.26,
+  "HazardousFee": null,
+  "FuelSurcharge": null,
+  "TransportationCharge": null,
+  "MinimumOrder": null,
+  "SubTotal": 132.54,
+  "TotalTax": 17.23,
+  "InvoiceTotal": 149.77,
+  "AmountDue": null,
+  "Items": [
+    {
+      "Description": "ADULT BVM W/ UNIV TUBING SINGLES",
+      "Quantity": 6,
+      "Unit": "EA",
+      "UnitPrice": 16.88,
+      "Tax": 13.17,
+      "Amount": 101.28
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "ModelId": "fisher-scientific-invoice-v1",
+  "UniqueId": "01JPANGVDK57VR19CT17QG4KA6",
+  "InvoiceId": "1765399",
+  "InvoiceDate": "2025-01-21",
+  "DueDate": null,
+  "PurchaseOrder": "255140",
+  "VendorName": "Fisher Scientific Company",
+  "Freight": null,
+  "HazardousFee": null,
+  "FuelSurcharge": null,
+  "TransportationCharge": null,
+  "MinimumOrder": null,
+  "SubTotal": 184.35,
+  "TotalTax": 23.97,
+  "InvoiceTotal": 208.32,
+  "AmountDue": null,
+  "Items": [
+    {
+      "Description": "TEST SHOWER PVC W/PE PAIL",
+      "Quantity": 1,
+      "Unit": "EA",
+      "UnitPrice": 184.35,
+      "Tax": null,
+      "Amount": 184.35
+    }
+  ]
+}

@@ -7,8 +7,6 @@ namespace HPHA.UiPath.Core.Converters
 {
     public static class JsonToEntityConverter
     {
-        private const double CONFIDENCE_RATE = 0.500d;
-
         /// <summary>
         /// Converts a compacted JSON file to a PurchaseOrderEntity.
         /// </summary>
@@ -50,66 +48,50 @@ namespace HPHA.UiPath.Core.Converters
             if (invoiceData == null)
                 throw new ArgumentNullException(nameof(invoiceData));
 
+            Ulid? uniqueId = null;
+            if (Ulid.TryParse(invoiceData.UniqueId, out var parsedUniqueId))
+                uniqueId = parsedUniqueId;
+
             DateOnly? invoiceDate = null;
-            if (DateOnly.TryParse(invoiceData?.InvoiceDate?.Content, out var parsedDate))
-            {
-                invoiceDate = parsedDate;
-            }
+            if (DateOnly.TryParse(invoiceData?.InvoiceDate, out var parsedInvoiceDate))
+                invoiceDate = parsedInvoiceDate;
 
             DateOnly? dueDate = null;
-            if (DateOnly.TryParse(invoiceData?.DueDate?.Content, out var parsedDueDate))
-            {
+            if (DateOnly.TryParse(invoiceData?.DueDate, out var parsedDueDate))
                 dueDate = parsedDueDate;
-            }
 
             var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
             {
-                Description = item.Description?.Content,
-                Quantity = item.Quantity?.Content,
-                UnitPrice = item.UnitPrice?.Content,
-                Tax = item.Tax?.Content,
-                Amount = item.Amount?.Content
+                Description = item.Description,
+                Quantity = item.Quantity,
+                Unit = item.Unit,
+                UnitPrice = item.UnitPrice,
+                Tax = item.Tax,
+                Amount = item.Amount
             }).ToArray();
 
             var entity = new PurchaseOrderEntity
             {
-                InvoiceId = invoiceData?.InvoiceId?.Content,
+                ModelId = invoiceData?.ModelId,
+                UniqueId = uniqueId,
+                InvoiceId = invoiceData?.InvoiceId,
                 InvoiceDate = invoiceDate,
                 DueDate = dueDate,
-                PurchaseOrder = invoiceData?.PurchaseOrder?.Content,
-                Vendor = new() { Name = invoiceData?.VendorName?.Content },
-                Freight = invoiceData?.Freight?.Content,
-                SubTotal = invoiceData?.SubTotal?.Content,
-                TotalTax = invoiceData?.TotalTax?.Content,
-                InvoiceTotal = invoiceData?.InvoiceTotal?.Content,
+                PurchaseOrder = invoiceData?.PurchaseOrder,
+                Vendor = new() { Name = invoiceData?.VendorName },
+                Freight = invoiceData?.Freight,
+                HazardousFee = invoiceData?.HazardousFee,
+                FuelSurcharge = invoiceData?.FuelSurcharge,
+                TransportationCharge = invoiceData?.TransportationCharge,
+                MinimumOrder = invoiceData?.MinimumOrder,
+                SubTotal = invoiceData?.SubTotal,
+                TotalTax = invoiceData?.TotalTax,
+                InvoiceTotal = invoiceData?.InvoiceTotal,
+                AmountDue = invoiceData?.AmountDue,
                 Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
             };
 
-            SetTotals(entity, invoiceData!);
-
             return entity;
-        }
-
-        private static void SetTotals(PurchaseOrderEntity entity, InvoiceData invoiceData)
-        {
-            var subTotal = invoiceData!.SubTotal ?? null;
-            var totalTax = invoiceData!.TotalTax ?? null;
-            var invoiceTotal = invoiceData!.InvoiceTotal ?? null;
-            var amountDue = invoiceData!.AmountDue ?? null;
-
-            if (subTotal is null && totalTax != null && invoiceTotal != null && amountDue != null
-                && amountDue?.Content > invoiceTotal?.Content
-                && (totalTax?.Content + invoiceTotal?.Content) == amountDue?.Content)
-            {
-                subTotal = invoiceTotal;
-                subTotal!.Confidence = CONFIDENCE_RATE;
-                invoiceTotal = amountDue;
-                invoiceTotal!.Confidence = CONFIDENCE_RATE;
-            }
-
-            entity.SubTotal = subTotal?.Content;
-            entity.TotalTax = totalTax?.Content;
-            entity.InvoiceTotal = invoiceTotal?.Content;
         }
     }
 }

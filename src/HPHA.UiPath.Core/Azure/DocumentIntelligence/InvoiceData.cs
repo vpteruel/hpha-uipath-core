@@ -4,35 +4,53 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
 {
     public class InvoiceData
     {
+        [JsonPropertyName("ModelId")]
+        public string? ModelId { get; set; }
+
+        [JsonPropertyName("UniqueId")]
+        public string? UniqueId { get; set; }
+        
         [JsonPropertyName("InvoiceId")]
-        public StringValue? InvoiceId { get; set; }
+        public string? InvoiceId { get; set; }
 
         [JsonPropertyName("InvoiceDate")]
-        public StringValue? InvoiceDate { get; set; }
+        public string? InvoiceDate { get; set; }
 
         [JsonPropertyName("DueDate")]
-        public StringValue? DueDate { get; set; }
+        public string? DueDate { get; set; }
 
         [JsonPropertyName("PurchaseOrder")]
-        public StringValue? PurchaseOrder { get; set; }
+        public string? PurchaseOrder { get; set; }
 
         [JsonPropertyName("VendorName")]
-        public StringValue? VendorName { get; set; }
+        public string? VendorName { get; set; }
 
         [JsonPropertyName("Freight")]
-        public DoubleValue? Freight { get; set; }
+        public double? Freight { get; set; }
+
+        [JsonPropertyName("HazardousFee")]
+        public double? HazardousFee { get; set; }
+
+        [JsonPropertyName("FuelSurcharge")]
+        public double? FuelSurcharge { get; set; }
+
+        [JsonPropertyName("TransportationCharge")]
+        public double? TransportationCharge { get; set; }
+
+        [JsonPropertyName("MinimumOrder")]
+        public double? MinimumOrder { get; set; }
 
         [JsonPropertyName("SubTotal")]
-        public DoubleValue? SubTotal { get; set; }
+        public double? SubTotal { get; set; }
 
         [JsonPropertyName("TotalTax")]
-        public DoubleValue? TotalTax { get; set; }
+        public double? TotalTax { get; set; }
 
         [JsonPropertyName("InvoiceTotal")]
-        public DoubleValue? InvoiceTotal { get; set; }
+        public double? InvoiceTotal { get; set; }
 
         [JsonPropertyName("AmountDue")]
-        public DoubleValue? AmountDue { get; set; }
+        public double? AmountDue { get; set; }
 
         [JsonPropertyName("Items")]
         public List<Item>? Items { get; set; }

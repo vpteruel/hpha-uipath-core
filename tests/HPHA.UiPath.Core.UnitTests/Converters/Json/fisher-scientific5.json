@@ -1,0 +1,36 @@
+{
+  "ModelId": "fisher-scientific-invoice-v1",
+  "UniqueId": "01JPANJA7KREFMK7V0FJ5CX3R1",
+  "InvoiceId": "1759521",
+  "InvoiceDate": "2025-01-16",
+  "DueDate": null,
+  "PurchaseOrder": "256111",
+  "VendorName": "Fisher Scientific Company",
+  "Freight": 93.29,
+  "HazardousFee": 45,
+  "FuelSurcharge": 8,
+  "TransportationCharge": 40.29,
+  "MinimumOrder": null,
+  "SubTotal": 316.63,
+  "TotalTax": 41.16,
+  "InvoiceTotal": 357.79,
+  "AmountDue": null,
+  "Items": [
+    {
+      "Description": "TUBE CULT 10X75MM DISP CS/1000",
+      "Quantity": 1,
+      "Unit": "CS",
+      "UnitPrice": 89.4,
+      "Tax": null,
+      "Amount": 89.4
+    },
+    {
+      "Description": "WIPES ALCOHOL DI PK/100",
+      "Quantity": 2,
+      "Unit": "PK",
+      "UnitPrice": 66.97,
+      "Tax": null,
+      "Amount": 133.94
+    }
+  ]
+}

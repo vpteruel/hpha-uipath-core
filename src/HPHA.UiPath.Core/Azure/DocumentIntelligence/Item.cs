@@ -5,18 +5,21 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
     public class Item
     {
         [JsonPropertyName("Description")]
-        public StringValue? Description { get; set; }
+        public string? Description { get; set; }
 
         [JsonPropertyName("Quantity")]
-        public IntValue? Quantity { get; set; }
+        public int? Quantity { get; set; }
+
+        [JsonPropertyName("Unit")]
+        public string? Unit { get; set; }
 
         [JsonPropertyName("UnitPrice")]
-        public DoubleValue? UnitPrice { get; set; }
+        public double? UnitPrice { get; set; }
 
         [JsonPropertyName("Tax")]
-        public DoubleValue? Tax { get; set; }
+        public double? Tax { get; set; }
 
         [JsonPropertyName("Amount")]
-        public DoubleValue? Amount { get; set; }
+        public double? Amount { get; set; }
     }
 }
