@@ -24,6 +24,23 @@ namespace HPHA.UiPath.Core.ImageProcessing
         /// <returns></returns>
         public static (Image<Rgba32> capturedImage, string filePath) SnipRegion(string fileName, string inputFilePath, string inputFolderPath, int x, int y, int width, int height)
         {
+            return SnipRegion(fileName, inputFilePath, inputFolderPath, x, y, width, height, Color.Transparent);
+        }
+
+        /// <summary>
+        /// Snips a region from an image and saves it to a file.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="inputFilePath"></param>
+        /// <param name="inputFolderPath"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public static (Image<Rgba32> capturedImage, string filePath) SnipRegion(string fileName, string inputFilePath, string inputFolderPath, int x, int y, int width, int height, Color color)
+        {
             using Image<Rgba32> originalImage = Image.Load<Rgba32>(inputFilePath);
             Image<Rgba32> snippedImage;
 
@@ -33,9 +50,9 @@ namespace HPHA.UiPath.Core.ImageProcessing
                 int newWidth = Math.Max(width, MIN_WIDTH);
                 int newHeight = Math.Max(height, MIN_HEIGHT);
                 
-                // Create a new MIN_WIDTHxMIN_HEIGHT image with a transparent background
+                // Create a new MIN_WIDTHxMIN_HEIGHT image with a color background
                 snippedImage = new Image<Rgba32>(newWidth, newHeight);
-                snippedImage.Mutate(ctx => ctx.Fill(Color.Transparent));
+                snippedImage.Mutate(ctx => ctx.Fill(color));
 
                 // Draw the cropped region of the original image onto the new image
                 var croppedRegion = originalImage.Clone(ctx => ctx.Crop(new Rectangle(x, y, width, height)));
