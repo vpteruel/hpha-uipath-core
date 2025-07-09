@@ -6,7 +6,7 @@ namespace HPHA.UiPath.Core.Entities.Common
     public class ReferenceEntity
     {
         public string? EmailFrom { get; set; }
-        public string? VendorNickName { get; set; }
+        public string? VendorNickname { get; set; }
         public FileInfo? Pdf { get; set; }
         public FileInfo? DetailedJson { get; set; }
         public FileInfo? CompactedJson { get; set; }
