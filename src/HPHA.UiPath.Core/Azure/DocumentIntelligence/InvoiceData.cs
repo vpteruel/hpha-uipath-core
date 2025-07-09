@@ -28,6 +28,9 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
         [JsonPropertyName("Freight")]
         public double? Freight { get; set; }
 
+        [JsonPropertyName("ShippingCredit")]
+        public double? ShippingCredit { get; set; }
+
         [JsonPropertyName("HazardousFee")]
         public double? HazardousFee { get; set; }
 
