@@ -47,7 +47,7 @@ namespace HPHA.UiPath.Core.Converters
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        public static string GetField(DataTable dataTable, string from, string fieldName)
+        public static string GetFieldByEmail(DataTable dataTable, string from, string fieldName)
         {
             if (dataTable == null || dataTable.Rows.Count == 0)
             {
@@ -65,7 +65,7 @@ namespace HPHA.UiPath.Core.Converters
             }
 
             var dataRow = dataTable.AsEnumerable()
-                .FirstOrDefault(row => row.Field<string>(fieldName) == from);
+                .FirstOrDefault(row => row.Field<string>("Email") == from);
 
             return dataRow?[fieldName].ToString()
                 ?? throw new InvalidOperationException($"{fieldName} '{from}' not found in the DataTable.");
