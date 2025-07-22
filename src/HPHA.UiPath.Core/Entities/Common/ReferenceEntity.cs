@@ -7,7 +7,7 @@ namespace HPHA.UiPath.Core.Entities.Common
     {
         public string? EmailFrom { get; set; }
         public string? VendorNickname { get; set; }
-        public string? DateFormat { get; set; };
+        public string? DateFormat { get; set; }
         public FileInfo? Pdf { get; set; }
         public FileInfo? DetailedJson { get; set; }
         public FileInfo? CompactedJson { get; set; }
