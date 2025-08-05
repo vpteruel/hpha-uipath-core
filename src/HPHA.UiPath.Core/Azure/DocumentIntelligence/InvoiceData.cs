@@ -9,7 +9,10 @@ namespace HPHA.UiPath.Core.Azure.DocumentIntelligence
 
         [JsonPropertyName("UniqueId")]
         public string? UniqueId { get; set; }
-        
+
+        [JsonPropertyName("Type")]
+        public string? Type { get; set; }
+
         [JsonPropertyName("InvoiceId")]
         public string? InvoiceId { get; set; }
 
