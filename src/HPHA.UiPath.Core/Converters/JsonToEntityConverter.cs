@@ -74,6 +74,7 @@ namespace HPHA.UiPath.Core.Converters
             {
                 ModelId = invoiceData?.ModelId,
                 UniqueId = uniqueId,
+                Type = invoiceData?.Type,
                 InvoiceId = invoiceData?.InvoiceId,
                 InvoiceDate = invoiceDate,
                 DueDate = dueDate,
