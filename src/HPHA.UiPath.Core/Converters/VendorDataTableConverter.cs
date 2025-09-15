@@ -21,16 +21,15 @@ namespace HPHA.UiPath.Core.Converters
             var dataTable = new DataTable();
             dataTable.Columns.Add("Vendor", typeof(string));
             dataTable.Columns.Add("Email", typeof(string));
-            dataTable.Columns.Add("DateFormat", typeof(string));
 
             // Read the text file and populate the DataTable
             var lines = File.ReadAllLines(filePath);
             foreach (var line in lines)
             {
                 var columns = line.Split(';');
-                if (columns.Length == 3)
+                if (columns.Length == 2)
                 {
-                    dataTable.Rows.Add(columns[0], columns[1], columns[2]);
+                    dataTable.Rows.Add(columns[0], columns[1]);
                 }
             }
 
