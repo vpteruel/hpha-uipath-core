@@ -70,7 +70,7 @@ namespace HPHA.UiPath.Core.Converters
                 InvoiceId = invoiceData?.InvoiceNumber,
                 InvoiceDate = invoiceDate,
                 PurchaseOrder = invoiceData?.PoNumber,
-                Vendor = new() { Name = invoiceData?.VendorName },
+                VendorName = invoiceData?.VendorName,
                 Freight = invoiceData?.AmountFreight,
                 SubTotal = invoiceData?.AmountUntaxed,
                 TotalTax = invoiceData?.AmountTax,
