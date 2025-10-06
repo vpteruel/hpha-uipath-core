@@ -1,28 +1,27 @@
 {
-  "ModelId": "prebuilt-invoice",
-  "UniqueId": "01JPAP64MG66799B4R3F2WF910",
-  "InvoiceId": "36794479",
-  "InvoiceDate": "2025-01-17",
-  "DueDate": null,
-  "PurchaseOrder": "256049",
-  "VendorName": "Baxter",
-  "Freight": null,
-  "HazardousFee": null,
-  "FuelSurcharge": null,
-  "TransportationCharge": null,
-  "MinimumOrder": null,
-  "SubTotal": 175.52,
-  "TotalTax": 22.82,
-  "InvoiceTotal": 198.34,
-  "AmountDue": 198.34,
-  "Items": [
+  "identifier": "01JPAP64MG66799B4R3F2WF910",
+  "invoice_type": "Invoice",
+  "invoice_number": "36794479",
+  "po_number": "256049",
+  "invoice_date": "2025-01-17",
+  "vendor_name": "Baxter",
+  "amount_freight": null,
+  "amount_untaxed": 175.52,
+  "amount_tax": 22.82,
+  "amount": 198.34,
+  "amount_due": 198.34,
+  "shipping_credit": null,
+  "hazardous_fee": null,
+  "handling_fee": null,
+  "fuel_surcharge": null,
+  "transportation_charge": null,
+  "minimum_order": null,
+  "items": [
     {
-      "Description": "WATER, STER F/INJ 1000ML\nFOR PHARMACY USE ONLY 12EA/CA\n22.82",
-      "Quantity": null,
-      "Unit": "CA",
-      "UnitPrice": 43.88,
-      "Tax": null,
-      "Amount": 175.52
+      "quantity": null,
+      "amount_unit": 43.88,
+      "amount_tax": null,
+      "amount": 175.52
     }
   ]
 }

@@ -1,28 +1,27 @@
 {
-  "ModelId": "fisher-scientific-invoice-v1",
-  "UniqueId": "01JPANHT7VJ6JSZR8117SHD808",
-  "InvoiceId": "1763490",
-  "InvoiceDate": "2025-01-20",
-  "DueDate": null,
-  "PurchaseOrder": "256254",
-  "VendorName": "Fisher Scientific Company",
-  "Freight": 94.88,
-  "HazardousFee": null,
-  "FuelSurcharge": 8,
-  "TransportationCharge": 86.88,
-  "MinimumOrder": null,
-  "SubTotal": 576.48,
-  "TotalTax": 74.94,
-  "InvoiceTotal": 651.42,
-  "AmountDue": null,
-  "Items": [
+  "identifier": "01JPANHT7VJ6JSZR8117SHD808",
+  "invoice_type": "Invoice",
+  "invoice_number": "1763490",
+  "po_number": "256254",
+  "invoice_date": "2025-01-20",
+  "vendor_name": "Fisher Scientific Company",
+  "amount_freight": 94.88,
+  "amount_untaxed": 576.48,
+  "amount_tax": 74.94,
+  "amount": 651.42,
+  "amount_due": null,
+  "shipping_credit": null,
+  "hazardous_fee": null,
+  "handling_fee": null,
+  "fuel_surcharge": 8,
+  "transportation_charge": 86.88,
+  "minimum_order": null,
+  "items": [
     {
-      "Description": "SPEC BAG BIOHAZ 6X9 PK/1000",
-      "Quantity": 5,
-      "Unit": "PK",
-      "UnitPrice": 96.32,
-      "Tax": null,
-      "Amount": 481.6
+      "quantity": 5,
+      "amount_unit": 96.32,
+      "amount_tax": null,
+      "amount": 481.6
     }
   ]
 }

@@ -48,46 +48,39 @@ namespace HPHA.UiPath.Core.Converters
             if (invoiceData == null)
                 throw new ArgumentNullException(nameof(invoiceData));
 
-            Ulid? uniqueId = null;
-            if (Ulid.TryParse(invoiceData.UniqueId, out var parsedUniqueId))
-                uniqueId = parsedUniqueId;
+            Ulid? identifier = null;
+            if (Ulid.TryParse(invoiceData.Identifier, out var parsedIdentifier))
+                identifier = parsedIdentifier;
 
             DateOnly? invoiceDate = null;
             if (DateOnly.TryParse(invoiceData?.InvoiceDate, out var parsedInvoiceDate))
                 invoiceDate = parsedInvoiceDate;
 
-            DateOnly? dueDate = null;
-            if (DateOnly.TryParse(invoiceData?.DueDate, out var parsedDueDate))
-                dueDate = parsedDueDate;
-
             var items = invoiceData?.Items?.Select(item => new PurchaseOrderItemEntity
             {
-                Description = item.Description,
                 Quantity = item.Quantity,
-                Unit = item.Unit,
-                UnitPrice = item.UnitPrice,
-                Tax = item.Tax,
+                UnitPrice = item.AmountUnit,
+                Tax = item.AmountTax,
                 Amount = item.Amount
             }).ToArray();
 
             var entity = new PurchaseOrderEntity
             {
-                ModelId = invoiceData?.ModelId,
-                UniqueId = uniqueId,
-                InvoiceId = invoiceData?.InvoiceId,
+                UniqueId = identifier,
+                InvoiceId = invoiceData?.InvoiceNumber,
                 InvoiceDate = invoiceDate,
-                DueDate = dueDate,
-                PurchaseOrder = invoiceData?.PurchaseOrder,
+                PurchaseOrder = invoiceData?.PoNumber,
                 Vendor = new() { Name = invoiceData?.VendorName },
-                Freight = invoiceData?.Freight,
+                Freight = invoiceData?.AmountFreight,
+                SubTotal = invoiceData?.AmountUntaxed,
+                TotalTax = invoiceData?.AmountTax,
+                InvoiceTotal = invoiceData?.Amount,
+                AmountDue = invoiceData?.AmountDue,
                 HazardousFee = invoiceData?.HazardousFee,
+                HandlingFee = invoiceData?.HandlingFee,
                 FuelSurcharge = invoiceData?.FuelSurcharge,
                 TransportationCharge = invoiceData?.TransportationCharge,
                 MinimumOrder = invoiceData?.MinimumOrder,
-                SubTotal = invoiceData?.SubTotal,
-                TotalTax = invoiceData?.TotalTax,
-                InvoiceTotal = invoiceData?.InvoiceTotal,
-                AmountDue = invoiceData?.AmountDue,
                 Items = items ?? Array.Empty<PurchaseOrderItemEntity>()
             };
 

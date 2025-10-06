@@ -14,6 +14,7 @@ namespace HPHA.UiPath.Core.Entities.Common
         public PurchaseOrderVendorEntity? Vendor { get; set; }
         public double? Freight { get; set; }
         public double? HazardousFee { get; set; }
+        public double? HandlingFee { get; set; }
         public double? FuelSurcharge { get; set; }
         public double? TransportationCharge { get; set; }
         public double? MinimumOrder { get; set; }

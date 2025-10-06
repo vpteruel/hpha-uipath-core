@@ -1,28 +1,27 @@
 {
-  "ModelId": "fisher-scientific-invoice-v1",
-  "UniqueId": "01JPANGC02PZ7YSRPJ8JE6XN7K",
-  "InvoiceId": "1821376",
-  "InvoiceDate": "2025-03-03",
-  "DueDate": null,
-  "PurchaseOrder": "257767",
-  "VendorName": "Fisher Scientific Company",
-  "Freight": 26,
-  "HazardousFee": null,
-  "FuelSurcharge": 8,
-  "TransportationCharge": 18,
-  "MinimumOrder": 29,
-  "SubTotal": 131.05,
-  "TotalTax": 17.04,
-  "InvoiceTotal": 148.09,
-  "AmountDue": null,
-  "Items": [
+  "identifier": "01JPANGC02PZ7YSRPJ8JE6XN7K",
+  "invoice_type": "Invoice",
+  "invoice_number": "1821376",
+  "po_number": "257767",
+  "invoice_date": "2025-03-03",
+  "vendor_name": "Fisher Scientific Company",
+  "amount_freight": 26,
+  "amount_untaxed": 131.05,
+  "amount_tax": 17.04,
+  "amount": 148.09,
+  "amount_due": null,
+  "shipping_credit": null,
+  "hazardous_fee": null,
+  "handling_fee": null,
+  "fuel_surcharge": 8,
+  "transportation_charge": 18,
+  "minimum_order": 29,
+  "items": [
     {
-      "Description": "SLIDES SUPERFROST PLUS 25X75MM",
-      "Quantity": 1,
-      "Unit": "GR",
-      "UnitPrice": 76.05,
-      "Tax": null,
-      "Amount": 76.05
+      "quantity": 1,
+      "amount_unit": 76.05,
+      "amount_tax": null,
+      "amount": 76.05
     }
   ]
 }
