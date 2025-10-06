@@ -56,6 +56,7 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             , string purchaseOrder
             , string vendorName
             , double freight
+            , double shippingCredit
             , double hazardousFee
             , double handlingFee
             , double fuelSurcharge
@@ -82,9 +83,11 @@ namespace HPHA.UiPath.Core.UnitTests.Converters
             if (!string.IsNullOrEmpty(dueDate))
                 result.DueDate.ShouldBe(DateOnly.Parse(dueDate));
             result.PurchaseOrder.ShouldBe(purchaseOrder);
-            result.Vendor?.Name.ShouldBe(vendorName);
+            result.VendorName.ShouldBe(vendorName);
             if (freight > 0d)
                 result.Freight.ShouldBe(freight);
+            if (shippingCredit > 0d)
+                result.ShippingCredit.ShouldBe(shippingCredit);
             if (hazardousFee > 0d)
                 result.HazardousFee.ShouldBe(hazardousFee);
             if (handlingFee > 0d)

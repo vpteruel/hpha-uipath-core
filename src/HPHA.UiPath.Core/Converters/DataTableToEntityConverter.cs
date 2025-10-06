@@ -18,12 +18,7 @@ namespace HPHA.UiPath.Core.Converters
                 .Select(poGroup => new PurchaseOrderEntity
                 {
                     PurchaseOrder = poGroup.Key,
-                    Vendor = new PurchaseOrderVendorEntity
-                    {
-                        Number = poGroup.First().Field<string>("Vendor #"),
-                        Mnemonic = poGroup.First().Field<string>("Vendor Mnemonic"),
-                        Name = poGroup.First().Field<string>("Vendor Name")
-                    },
+                    VendorName = poGroup.First().Field<string>("Vendor Name"),
                     Items = poGroup.Select(row => new PurchaseOrderItemEntity
                     {
                         PoLine = Convert.ToInt32(!string.IsNullOrWhiteSpace(row.Field<string?>("PO Line")) ? row.Field<string?>("PO Line") : "0"),

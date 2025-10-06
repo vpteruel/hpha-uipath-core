@@ -7,12 +7,15 @@ namespace HPHA.UiPath.Core.Entities.Common
     {
         public string? ModelId { get; set; }
         public Ulid? UniqueId { get; set; }
+        
+        public string? Type { get; set; }
         public string? InvoiceId { get; set; }
         public DateOnly? InvoiceDate { get; set; }
         public DateOnly? DueDate { get; set; }
         public string? PurchaseOrder { get; set; }
-        public PurchaseOrderVendorEntity? Vendor { get; set; }
+        public string? VendorName { get; set; }
         public double? Freight { get; set; }
+        public double? ShippingCredit { get; set; }
         public double? HazardousFee { get; set; }
         public double? HandlingFee { get; set; }
         public double? FuelSurcharge { get; set; }
