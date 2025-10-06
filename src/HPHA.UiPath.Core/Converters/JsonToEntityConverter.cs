@@ -67,6 +67,7 @@ namespace HPHA.UiPath.Core.Converters
             var entity = new PurchaseOrderEntity
             {
                 UniqueId = identifier,
+                Type = invoiceData?.InvoiceType,
                 InvoiceId = invoiceData?.InvoiceNumber,
                 InvoiceDate = invoiceDate,
                 PurchaseOrder = invoiceData?.PoNumber,
